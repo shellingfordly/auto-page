@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.31.0",
-    "vue": "^3.2.25"
+    "pinia": "^2.0.14",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.16",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

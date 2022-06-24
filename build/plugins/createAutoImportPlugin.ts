@@ -1,5 +1,7 @@
 import AutoImport from "unplugin-auto-import/vite";
 
 export function createAutoImportPlugin() {
-  return AutoImport({});
+  return AutoImport({
+    imports: ["vue", "vue-router"],
+  });
 }
