@@ -5,20 +5,21 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AAvatar: typeof import('@arco-design/web-vue')['Avatar']
-    ABreadcrumb: typeof import('@arco-design/web-vue')['Breadcrumb']
-    ABreadcrumbItem: typeof import('@arco-design/web-vue')['BreadcrumbItem']
     AButton: typeof import('@arco-design/web-vue')['Button']
     ALayout: typeof import('@arco-design/web-vue')['Layout']
     ALayoutContent: typeof import('@arco-design/web-vue')['LayoutContent']
-    ALayoutFooter: typeof import('@arco-design/web-vue')['LayoutFooter']
     ALayoutHeader: typeof import('@arco-design/web-vue')['LayoutHeader']
     ALayoutSider: typeof import('@arco-design/web-vue')['LayoutSider']
-    AMenu: typeof import('@arco-design/web-vue')['Menu']
-    AMenuItem: typeof import('@arco-design/web-vue')['MenuItem']
-    ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
+    BorderContainer: typeof import('./src/components/container/BorderContainer.vue')['default']
+    Container: typeof import('./src/components/widget/Container.vue')['default']
+    ContainerTemplate: typeof import('./src/components/templates/ContainerTemplate.vue')['default']
+    ImageTemplate: typeof import('./src/components/templates/ImageTemplate.vue')['default']
+    NoticeTemplate: typeof import('./src/components/templates/NoticeTemplate.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SlideshowTemplate: typeof import('./src/components/templates/SlideshowTemplate.vue')['default']
+    TextTemplate: typeof import('./src/components/templates/TextTemplate.vue')['default']
+    Widget: typeof import('./src/components/widget/Widget.vue')['default']
   }
 }
 

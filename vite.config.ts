@@ -15,5 +15,17 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [createPlugins()],
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          hack: `true; @import (reference) "${resolve(
+            "src/styles/var/index.less"
+          )}";`,
+        },
+        javascriptEnabled: true,
+      },
+    },
+  },
+  plugins: createPlugins(),
 });

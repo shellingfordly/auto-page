@@ -9,12 +9,14 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.31.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
     "vue-router": "^4.0.16",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.182",
     "@types/node": "^18.0.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "consola": "^2.15.3",
