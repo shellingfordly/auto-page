@@ -1,9 +1,14 @@
 <script lang="ts" setup></script>
 
 <template>
-  <a-layout-content style="height: 100%">
+  <a-layout-content :class="$style.contentLayout">
     <RouterView />
   </a-layout-content>
 </template>
 
-<style scoped lang="less"></style>
+<style module scoped lang="less">
+.contentLayout {
+  height: 100%;
+  background-color: var(--color-fill-2);
+}
+</style>

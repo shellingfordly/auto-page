@@ -3,10 +3,14 @@ import VaHeader from "./header/Header.vue";
 import VaContent from "./content/Content.vue";
 </script>
 <template>
-  <a-layout style="height: 100%">
+  <a-layout :class="$style.layout">
     <VaHeader />
-    <a-layout>
-      <VaContent />
-    </a-layout>
+    <VaContent />
   </a-layout>
 </template>
+
+<style module scoped lang="less">
+.layout {
+  height: 100%;
+}
+</style>
