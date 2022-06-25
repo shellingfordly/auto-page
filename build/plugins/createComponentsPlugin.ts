@@ -7,6 +7,7 @@ export function createComponentsPlugin() {
       ArcoResolver({
         importStyle: "css",
         sideEffect: true,
+        // resolveIcons: true,
       }),
     ],
   });
