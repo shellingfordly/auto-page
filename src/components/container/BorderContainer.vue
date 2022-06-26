@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-import { BaseSchema } from "@/schemas/base";
 import { TemplateStore } from "@/store/modules/template";
+import { BaseSchema } from "@/schemas/base";
 
 const props = defineProps<{ schema: BaseSchema }>();
 const style = useCssModule();
 const templateStore = TemplateStore();
+const isSelected = computed(
+  () => props.schema.schemaId === templateStore.selectedId
+);
 const className = computed(() => [
-  style.schemaItem,
-  props.schema.schemaId === templateStore.selectedId && style.schemaSelected,
+  !isSelected.value && style.schemaItem,
+  isSelected.value && style.schemaSelected,
 ]);
 
 function onClick() {

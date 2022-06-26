@@ -2,13 +2,16 @@
 import { TextSchema } from "@/schemas";
 
 defineProps<{ schema: TextSchema }>();
+
+onMounted(() => {
+  console.log("TextTemplate");
+});
+const randomCount = Math.random();
 </script>
 
 <template>
   <BorderContainer :schema="schema">
-    <div :class="$style.container">
-      This si a TextSchema {{ Math.random() }}
-    </div>
+    <div :class="$style.container">This si a TextSchema {{ randomCount }}</div>
   </BorderContainer>
 </template>
 
