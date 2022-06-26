@@ -1,0 +1,1 @@
+export const DRAGGABLE_GROUP = "DRAGGABLE_GROUP";

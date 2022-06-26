@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     ALayoutContent: typeof import('@arco-design/web-vue')['LayoutContent']
     ALayoutHeader: typeof import('@arco-design/web-vue')['LayoutHeader']
     ALayoutSider: typeof import('@arco-design/web-vue')['LayoutSider']
+    APopover: typeof import('@arco-design/web-vue')['Popover']
     BorderContainer: typeof import('./src/components/container/BorderContainer.vue')['default']
     Container: typeof import('./src/components/widget/Container.vue')['default']
     ContainerTemplate: typeof import('./src/components/templates/ContainerTemplate.vue')['default']
@@ -19,6 +20,8 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SlideshowTemplate: typeof import('./src/components/templates/SlideshowTemplate.vue')['default']
     TextTemplate: typeof import('./src/components/templates/TextTemplate.vue')['default']
+    Trans: typeof import('./src/components/container/Trans.vue')['default']
+    TransitionContainer: typeof import('./src/components/container/TransitionContainer.vue')['default']
     Widget: typeof import('./src/components/widget/Widget.vue')['default']
   }
 }

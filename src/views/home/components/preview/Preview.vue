@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import SchemaTemplate from "./components/SchemaTemplate.vue";
+import { DRAGGABLE_GROUP } from "@/constants";
 import { SchemaItemType } from "@/types";
 import draggable from "vuedraggable";
-import SchemaTemplate from "./components/SchemaTemplate.vue";
 
-const contents = ref<SchemaItemType[]>([]);
+const content = ref<SchemaItemType[]>([]);
 </script>
 
 <template>
@@ -11,10 +12,9 @@ const contents = ref<SchemaItemType[]>([]);
     <div :class="$style.previewContent">
       <draggable
         :class="$style.draggable"
-        :list="contents"
-        group="people"
-        item-key="id"
-        ghostClass="ghost-schema"
+        :list="content"
+        item-key="schemaId"
+        :group="DRAGGABLE_GROUP"
       >
         <template #item="{ element }">
           <SchemaTemplate :schema="element" />
