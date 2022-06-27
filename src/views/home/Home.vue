@@ -10,21 +10,38 @@ import TransitionContainer from "@/components/container/TransitionContainer.vue"
       <WidgetsContainer />
     </TransitionContainer>
     <TemplatePreview />
-    <TransitionContainer :class="$style.homeLeft" position="right">
+    <TransitionContainer :class="$style.homeRight" position="right">
       <a-layout-sider style="height: 100%"> Sider Right </a-layout-sider>
     </TransitionContainer>
   </a-layout>
 </template>
 
 <style module scoped lang="less">
-.home {
-  height: 100%;
+@borderStyle: 1px solid var(--color-border);
 
-  &Left {
+.home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &Left,
+  &Right {
+    position: absolute;
     width: 200px;
     height: 100%;
+    z-index: 1;
     background-color: var(--color-bg-1);
-    border-right: 1px solid var(--color-border);
+  }
+
+  &Left {
+    left: 0;
+    border-right: @borderStyle;
+  }
+
+  &Right {
+    right: 0;
+    border-left: @borderStyle;
   }
 }
 </style>

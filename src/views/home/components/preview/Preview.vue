@@ -3,13 +3,17 @@ import SchemaTemplate from "./components/SchemaTemplate.vue";
 import { DRAGGABLE_GROUP } from "@/constants";
 import { SchemaItemType } from "@/types";
 import draggable from "vuedraggable";
+import VaResizeBox from "@/components/resizebox/VaResizeBox.vue";
 
 const content = ref<SchemaItemType[]>([]);
 </script>
 
 <template>
   <a-layout :class="$style.preview">
-    <div :class="$style.previewContent">
+    <VaResizeBox
+      :directions="['right', 'bottom']"
+      :class="$style.previewContent"
+    >
       <draggable
         :class="$style.draggable"
         :list="content"
@@ -20,7 +24,7 @@ const content = ref<SchemaItemType[]>([]);
           <SchemaTemplate :schema="element" />
         </template>
       </draggable>
-    </div>
+    </VaResizeBox>
   </a-layout>
 </template>
 
@@ -33,22 +37,16 @@ const content = ref<SchemaItemType[]>([]);
   .previewContent {
     position: relative;
     width: 800px;
+    min-width: 600px;
+    max-width: 1200px;
     height: 600px;
+    min-height: 300px;
+    max-height: 1200px;
     background-color: var(--color-bg-4);
     overflow: auto;
 
     .draggable {
       height: 100%;
-    }
-
-    .compItem {
-      width: 100%;
-      height: 50px;
-      text-align: center;
-      line-height: 50px;
-      border: 1px solid var(--color-border);
-      border-radius: 10px;
-      cursor: pointer;
     }
   }
 }

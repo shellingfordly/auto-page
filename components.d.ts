@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     ALayoutHeader: typeof import('@arco-design/web-vue')['LayoutHeader']
     ALayoutSider: typeof import('@arco-design/web-vue')['LayoutSider']
     APopover: typeof import('@arco-design/web-vue')['Popover']
+    AResizeBox: typeof import('@arco-design/web-vue')['ResizeBox']
     BorderContainer: typeof import('./src/components/container/BorderContainer.vue')['default']
     Container: typeof import('./src/components/widget/Container.vue')['default']
     ContainerTemplate: typeof import('./src/components/templates/ContainerTemplate.vue')['default']
@@ -22,6 +23,7 @@ declare module '@vue/runtime-core' {
     TextTemplate: typeof import('./src/components/templates/TextTemplate.vue')['default']
     Trans: typeof import('./src/components/container/Trans.vue')['default']
     TransitionContainer: typeof import('./src/components/container/TransitionContainer.vue')['default']
+    VaResizeBox: typeof import('./src/components/resizebox/VaResizeBox.vue')['default']
     Widget: typeof import('./src/components/widget/Widget.vue')['default']
   }
 }
