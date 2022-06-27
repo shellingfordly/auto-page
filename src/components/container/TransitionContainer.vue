@@ -39,7 +39,7 @@ const iconStyle = computed(() => {
     <div :class="$style.icon" :style="iconStyle" @click="move = !move">
       <icon-left />
     </div>
-    <div>
+    <div :class="$style.content">
       <slot />
     </div>
   </div>
@@ -60,11 +60,15 @@ const iconStyle = computed(() => {
     height: 24px;
     background-color: var(--color-bg-1);
     text-align: center;
-    line-height: 25px;
+    line-height: 20px;
     font-size: 12px;
     border-radius: 50px;
     cursor: pointer;
     border: 1px solid var(--color-border);
+  }
+  .content {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

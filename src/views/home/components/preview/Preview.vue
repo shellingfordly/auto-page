@@ -1,30 +1,28 @@
 <script lang="ts" setup>
-import SchemaTemplate from "./components/SchemaTemplate.vue";
+import SchemaTemplate from "./SchemaTemplate.vue";
 import { DRAGGABLE_GROUP } from "@/constants";
 import { SchemaItemType } from "@/types";
 import draggable from "vuedraggable";
-import VaResizeBox from "@/components/resizebox/VaResizeBox.vue";
 
 const content = ref<SchemaItemType[]>([]);
 </script>
 
 <template>
   <a-layout :class="$style.preview">
-    <VaResizeBox
-      :directions="['right', 'bottom']"
-      :class="$style.previewContent"
-    >
-      <draggable
-        :class="$style.draggable"
-        :list="content"
-        item-key="schemaId"
-        :group="DRAGGABLE_GROUP"
-      >
-        <template #item="{ element }">
-          <SchemaTemplate :schema="element" />
-        </template>
-      </draggable>
-    </VaResizeBox>
+    <a-resize-box :directions="['right', 'bottom']" :class="$style.resizeBox">
+      <div :class="$style.scrollBox">
+        <draggable
+          :class="$style.draggable"
+          :list="content"
+          item-key="schemaId"
+          :group="DRAGGABLE_GROUP"
+        >
+          <template #item="{ element }">
+            <SchemaTemplate :schema="element" />
+          </template>
+        </draggable>
+      </div>
+    </a-resize-box>
   </a-layout>
 </template>
 
@@ -34,7 +32,7 @@ const content = ref<SchemaItemType[]>([]);
   justify-content: center;
   align-items: center;
 
-  .previewContent {
+  .resizeBox {
     position: relative;
     width: 800px;
     min-width: 600px;
@@ -43,10 +41,15 @@ const content = ref<SchemaItemType[]>([]);
     min-height: 300px;
     max-height: 1200px;
     background-color: var(--color-bg-4);
-    overflow: auto;
 
-    .draggable {
+    .scrollBox {
       height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .draggable {
+        height: 100%;
+      }
     }
   }
 }

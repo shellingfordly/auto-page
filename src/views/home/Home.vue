@@ -2,6 +2,15 @@
 import WidgetsContainer from "./components/widget/WidgetsContainer.vue";
 import TemplatePreview from "./components/preview/Preview.vue";
 import TransitionContainer from "@/components/container/TransitionContainer.vue";
+import ControlSetting from "./components/control/ControlSetting.vue";
+
+onMounted(() => {
+  // window.onbeforeunload = () => true;
+});
+
+onUnmounted(() => {
+  // window.onbeforeunload = null;
+});
 </script>
 
 <template>
@@ -11,7 +20,7 @@ import TransitionContainer from "@/components/container/TransitionContainer.vue"
     </TransitionContainer>
     <TemplatePreview />
     <TransitionContainer :class="$style.homeRight" position="right">
-      <a-layout-sider style="height: 100%"> Sider Right </a-layout-sider>
+      <ControlSetting />
     </TransitionContainer>
   </a-layout>
 </template>
@@ -28,7 +37,6 @@ import TransitionContainer from "@/components/container/TransitionContainer.vue"
   &Left,
   &Right {
     position: absolute;
-    width: 200px;
     height: 100%;
     z-index: 1;
     background-color: var(--color-bg-1);
@@ -36,11 +44,13 @@ import TransitionContainer from "@/components/container/TransitionContainer.vue"
 
   &Left {
     left: 0;
+    width: 200px;
     border-right: @borderStyle;
   }
 
   &Right {
     right: 0;
+    width: 300px;
     border-left: @borderStyle;
   }
 }

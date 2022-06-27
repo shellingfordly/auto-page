@@ -1,7 +1,12 @@
 import { SchemaId } from "@/enums/schema";
 import { BaseSchema } from "./base";
 
+
+
+
 export class ContainerSchema extends BaseSchema {
+  public contents: any[] = [];
+
   constructor(schema?: ContainerSchema) {
     super();
     this.id = SchemaId.Container;

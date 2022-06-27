@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { TemplateStore } from "@/store/modules/template";
-import { BaseSchema } from "@/schemas/base";
+import { SchemaStore } from "@/store/modules/template";
+import { SchemaItemType } from "@/types";
 
-const props = defineProps<{ schema: BaseSchema }>();
+const props = defineProps<{ schema: SchemaItemType }>();
 const style = useCssModule();
-const templateStore = TemplateStore();
+const schemaStore = SchemaStore();
 const isSelected = computed(
-  () => props.schema.schemaId === templateStore.selectedId
+  () => props.schema.schemaId === schemaStore.selectedSchemaId
 );
 const className = computed(() => [
   !isSelected.value && style.schemaItem,
@@ -14,7 +14,8 @@ const className = computed(() => [
 ]);
 
 function onClick() {
-  templateStore.setSelectedId(props.schema.schemaId);
+  schemaStore.setSelectedId(props.schema.schemaId);
+  schemaStore.setSelectedSchema(props.schema);
 }
 </script>
 

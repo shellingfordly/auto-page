@@ -1,17 +1,23 @@
+import { SchemaItemType } from "@/types";
 import { defineStore } from "pinia";
 
 interface TemplateStateType {
-  selectedId: Symbol | undefined;
+  selectedSchemaId: Symbol | undefined;
+  selectedSchema: SchemaItemType | null;
 }
 
-export const TemplateStore = defineStore({
-  id: "TemplateStore",
+export const SchemaStore = defineStore({
+  id: "SchemaStore",
   state: (): TemplateStateType => ({
-    selectedId: undefined,
+    selectedSchemaId: undefined,
+    selectedSchema: null,
   }),
   actions: {
     setSelectedId(id: Symbol | undefined) {
-      this.selectedId = id;
+      this.selectedSchemaId = id;
+    },
+    setSelectedSchema(schema: SchemaItemType) {
+      this.selectedSchema = schema;
     },
   },
 });

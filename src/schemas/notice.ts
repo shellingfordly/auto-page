@@ -2,6 +2,8 @@ import { SchemaId } from "@/enums/schema";
 import { BaseSchema } from "./base";
 
 export class NoticeSchema extends BaseSchema {
+  public contents: any[] = [];
+
   constructor(schema?: NoticeSchema) {
     super();
     this.id = SchemaId.Notice;

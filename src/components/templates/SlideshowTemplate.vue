@@ -2,11 +2,33 @@
 import { SlideshowSchema } from "@/schemas";
 
 defineProps<{ schema: SlideshowSchema }>();
+
+function onClick(image: any) {
+  image.link && window.open(image);
+}
 </script>
 
 <template>
   <BorderContainer :schema="schema">
-    <div :class="$style.container">This si a SlideshowSchema</div>
+    <div :class="$style.container">
+      <a-carousel
+        :style="{
+          width: '100%',
+          height: '300px',
+        }"
+        :default-current="2"
+      >
+        <a-carousel-item v-for="image in schema.list">
+          <img
+            :src="image.url"
+            :style="{
+              width: '100%',
+            }"
+            @click="onClick(image)"
+          />
+        </a-carousel-item>
+      </a-carousel>
+    </div>
   </BorderContainer>
 </template>
 

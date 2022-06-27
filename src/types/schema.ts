@@ -12,3 +12,9 @@ export type SchemaItemType =
   | TextSchema
   | NoticeSchema
   | SlideshowSchema;
+
+export interface BorderType {
+  size: number;
+  style: string;
+  color: string;
+}

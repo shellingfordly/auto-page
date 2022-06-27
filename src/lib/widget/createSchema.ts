@@ -6,20 +6,20 @@ import {
   SlideshowSchema,
   TextSchema,
 } from "@/schemas";
-import { BaseSchema } from "@/schemas/base";
+import { SchemaItemType } from "@/types";
 
-export function createSchema(schema: BaseSchema) {
+export function createSchema(schema: SchemaItemType) {
   switch (schema.id) {
     case SchemaId.Image:
-      return new ImageSchema(schema);
+      return new ImageSchema(schema as ImageSchema);
     case SchemaId.Container:
-      return new ContainerSchema(schema);
+      return new ContainerSchema(schema as ContainerSchema);
     case SchemaId.Slideshow:
-      return new SlideshowSchema(schema);
+      return new SlideshowSchema(schema as SlideshowSchema);
     case SchemaId.Notice:
-      return new NoticeSchema(schema);
+      return new NoticeSchema(schema as NoticeSchema);
     case SchemaId.Text:
-      return new TextSchema(schema);
+      return new TextSchema(schema as TextSchema);
     default:
       return null;
   }
