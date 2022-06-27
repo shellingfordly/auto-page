@@ -1,36 +1,49 @@
 <script lang="ts" setup>
-import ControlBox from "@/components/controls/ControlBox.vue";
-import StyleControl from "@/components/controls/StyleControl.vue";
-import ImageUpload from "@/components/controls/ImageUpload.vue";
+import { ControlBox, StyleControl, ImageControl } from "@/components/controls";
 import { SchemaStore } from "@/store/modules/template";
-import { SlideshowSchema } from "@/schemas";
+import type { SlideshowSchema } from "@/schemas";
+import type { ImageInfoType } from "@/types";
 
 defineProps();
-
 const schemaStore = SchemaStore();
 const slideshowSchema = computed(
   () => schemaStore.selectedSchema as SlideshowSchema
 );
 
-console.log("slideshowSchema", slideshowSchema);
+function onDelete(item: ImageInfoType) {
+  slideshowSchema.value.removeSlideshowItem(item.uid);
+}
 
-const slideshowList = ref([]);
+function onChangeLink(link: string, item: ImageInfoType) {
+  slideshowSchema.value.updateSlideshowItem({ ...item, link });
+}
 </script>
 
 <template>
   <div :class="$style.controlTitle">轮播图设置</div>
   <ControlBox title="轮播图列表">
-    <ImageUpload
+    <ImageControl
+      :class="$style.imageItem"
       :image="image"
       v-for="image in slideshowSchema.list"
       :key="image.url"
+      :deleteIcon="true"
+      @delete="onDelete(image)"
+      @change-link="(link) => onChangeLink(link, image)"
     />
+    <a-button long @click="slideshowSchema.addSlideshowItem({})">
+      Add Item
+    </a-button>
   </ControlBox>
+  <ControlBox title="轮播图配置"> </ControlBox>
   <ControlBox title="轮播图样式">
-    <StyleControl />
+    <StyleControl :style="slideshowSchema.style" />
   </ControlBox>
 </template>
 
 <style module scoped lang="less">
 @import "@/styles/modules/control.module.less";
+:deep(.imageItem) {
+  border-bottom: 1px dashed var(--color-border);
+}
 </style>

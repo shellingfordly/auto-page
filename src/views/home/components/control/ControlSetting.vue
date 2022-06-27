@@ -29,7 +29,16 @@ const comp = computed(() => {
 </script>
 
 <template>
-  <template v-if="comp">
-    <component :is="comp"></component>
-  </template>
+  <div :class="$style.controlSettingBox">
+    <template v-if="comp">
+      <component :is="comp"></component>
+    </template>
+  </div>
 </template>
+
+<style module scoped lang="less">
+.controlSettingBox {
+  height: 100%;
+  overflow-y: auto;
+}
+</style>

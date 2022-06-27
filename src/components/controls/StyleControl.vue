@@ -1,29 +1,27 @@
 <script lang="ts" setup>
-const styles = [
-  {
-    label: "宽度",
-  },
-  {
-    label: "高度",
-  },
-  {
-    label: "内边距",
-  },
-  {
-    label: "外边距",
-  },
-  {
-    label: "边框",
-  },
-  {
-    label: "圆角",
-  },
-];
+import type { StyleKeys, StyleListItem, CSSProperties } from "@/types";
+import { STYLE_MAP } from "@/constants";
+
+const props = defineProps<{
+  style: CSSProperties;
+}>();
+
+const styleList = computed(() => {
+  const style = props.style;
+  const list: StyleListItem[] = [];
+  Object.keys(style).forEach((key) => {
+    list.push({
+      label: STYLE_MAP[key as StyleKeys],
+      value: key as StyleKeys,
+    });
+  });
+  return list;
+});
 </script>
 
 <template>
   <div class="container">
-    <div :class="$style.item" v-for="style in styles">
+    <div :class="$style.item" v-for="style in styleList">
       <span :class="$style.controlItemLabel">{{ style.label }}：</span>
       <span>100px</span>
     </div>

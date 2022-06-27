@@ -1,3 +1,4 @@
+import { IMAGE_INFO_SYMBOL } from "@/constants";
 import { SchemaId } from "@/enums/schema";
 import {
   ContainerSchema,
@@ -6,7 +7,7 @@ import {
   SlideshowSchema,
   TextSchema,
 } from "@/schemas";
-import { SchemaItemType } from "@/types";
+import { ImageInfoType, SchemaItemType } from "@/types";
 
 export function createSchema(schema: SchemaItemType) {
   switch (schema.id) {
@@ -23,4 +24,12 @@ export function createSchema(schema: SchemaItemType) {
     default:
       return null;
   }
+}
+
+export function createImageInfo(item: Partial<ImageInfoType>) {
+  return {
+    uid: Symbol(IMAGE_INFO_SYMBOL),
+    url: item.url || "",
+    link: item.link || "",
+  };
 }

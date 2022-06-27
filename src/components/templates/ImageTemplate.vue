@@ -6,7 +6,7 @@ defineProps<{ schema: ImageSchema }>();
 
 <template>
   <BorderContainer :schema="schema">
-    <div :class="$style.container">This si a ImageSchema</div>
+    <div :class="$style.container">{{ schema.info.link }}</div>
   </BorderContainer>
 </template>
 

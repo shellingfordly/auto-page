@@ -1,5 +1,4 @@
-import { SchemaId } from "@/enums/schema";
-import { BorderType } from "@/types";
+import type { SchemaId, CSSProperties } from "@/types";
 
 export class BaseSchema {
   public id: SchemaId | undefined;
@@ -9,18 +8,24 @@ export class BaseSchema {
   public status = false;
   public selected = false;
   public link: string | undefined;
-  /* style start */
-  public width: string | undefined;
-  public height: string | undefined;
-  public margin: number | undefined;
-  public padding: number | undefined;
-  public border: BorderType | undefined;
-  public borderRadius: number | undefined;
-  /* style end */
+  public style: CSSProperties;
 
-  constructor() {}
+  constructor() {
+    this.style = this.createBaseStyle();
+  }
 
   setSelected(bool: boolean) {
     this.selected = bool;
+  }
+
+  private createBaseStyle(): CSSProperties {
+    return {
+      width: "100%",
+      height: "",
+      margin: 0,
+      padding: 0,
+      border: 0,
+      borderRadius: 0,
+    };
   }
 }

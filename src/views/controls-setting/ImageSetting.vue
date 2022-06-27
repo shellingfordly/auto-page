@@ -1,18 +1,23 @@
 <script lang="ts" setup>
-import ControlBox from "@/components/controls/ControlBox.vue";
-import ImageUpload from "@/components/controls/ImageUpload.vue";
-import StyleControl from "@/components/controls/StyleControl.vue";
+import { ControlBox, ImageControl, StyleControl } from "@/components/controls";
+import type { ImageSchema } from "@/schemas";
+import { SchemaStore } from "@/store/modules/template";
 
-defineProps();
+const schemaStore = SchemaStore();
+const imageSchema = computed(() => schemaStore.selectedSchema as ImageSchema);
+
+function onChangeLink(link: string) {
+  imageSchema.value.setImageInfo({ link });
+}
 </script>
 
 <template>
   <div :class="$style.controlTitle">图片设置</div>
   <ControlBox title="图片详情">
-    <ImageUpload />
+    <ImageControl :image="imageSchema.info" @change-link="onChangeLink" />
   </ControlBox>
   <ControlBox title="图片详情">
-    <StyleControl />
+    <StyleControl :style="imageSchema.style" />
   </ControlBox>
 </template>
 
