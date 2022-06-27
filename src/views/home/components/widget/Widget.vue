@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Icon } from "@iconify/vue";
+
 defineProps({
   widget: {
     type: Object,
@@ -9,18 +11,29 @@ defineProps({
 
 <template>
   <div :class="$style.widget">
-    {{ widget.name }}
+    <Icon v-if="widget.icon" :icon="widget.icon" height="20" />
+    <span :class="$style.name">{{ widget.name }}</span>
   </div>
 </template>
 
 <style module scoped lang="less">
 .widget {
-  width: 50px;
-  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  padding: 15px 0;
   text-align: center;
-  line-height: 50px;
   border: 1px solid var(--color-border);
-  border-radius: 10px;
   cursor: pointer;
+
+  &:hover {
+    border-color: rgb(var(--primary-6));
+  }
+
+  .name {
+    margin-top: 10px;
+  }
 }
 </style>

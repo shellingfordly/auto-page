@@ -6,6 +6,7 @@ export class SlideshowSchema extends BaseSchema {
     super();
     this.id = SchemaId.Slideshow;
     this.name = "轮播图";
+    this.icon = "ri:slideshow-2-line";
     this.schemaId = Symbol(SchemaId.Slideshow);
   }
 }

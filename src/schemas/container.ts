@@ -6,6 +6,7 @@ export class ContainerSchema extends BaseSchema {
     super();
     this.id = SchemaId.Container;
     this.name = "容器";
+    this.icon = "charm:container";
     this.schemaId = Symbol(SchemaId.Container);
   }
 }

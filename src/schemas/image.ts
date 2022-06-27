@@ -6,6 +6,7 @@ export class ImageSchema extends BaseSchema {
     super();
     this.id = SchemaId.Image;
     this.name = "图片";
+    this.icon = "clarity:image-line";
     this.schemaId = Symbol(SchemaId.Image);
   }
 }

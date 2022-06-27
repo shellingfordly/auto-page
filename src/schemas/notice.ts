@@ -6,6 +6,7 @@ export class NoticeSchema extends BaseSchema {
     super();
     this.id = SchemaId.Notice;
     this.name = "公告";
+    this.icon = "fe:notice-active";
     this.schemaId = Symbol(SchemaId.Notice);
   }
 }
