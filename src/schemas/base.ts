@@ -28,4 +28,8 @@ export class BaseSchema {
       borderRadius: 0,
     };
   }
+
+  updateBaseStyle(style: CSSProperties) {
+    Object.assign(this.style, style);
+  }
 }

@@ -3,7 +3,6 @@ import { BaseSchema } from "./base";
 
 export class TextSchema extends BaseSchema {
   public text = "This is TextSchema";
-  public style = {};
 
   constructor(schema?: TextSchema) {
     super();
@@ -11,6 +10,9 @@ export class TextSchema extends BaseSchema {
     this.name = "文本";
     this.icon = "bx:text";
     this.schemaId = Symbol(SchemaId.Text);
+    this.updateBaseStyle({
+      textAlign: "center",
+    });
   }
 
   setText(value: string) {

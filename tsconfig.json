@@ -22,7 +22,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "./*.d.ts",
-    "build/**/*.ts"
+    "build/**/*.ts",
+    "*.d.ts"
   ]
 }

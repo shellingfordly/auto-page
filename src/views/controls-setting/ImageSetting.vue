@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ControlBox, ImageControl, StyleControl } from "@/components/controls";
 import type { ImageSchema } from "@/schemas";
 import { SchemaStore } from "@/store/modules/template";
 

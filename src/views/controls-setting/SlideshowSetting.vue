@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { ControlBox, StyleControl, ImageControl } from "@/components/controls";
 import { SchemaStore } from "@/store/modules/template";
 import type { SlideshowSchema } from "@/schemas";
 import type { ImageInfoType } from "@/types";
+import { ImageControl, ControlBox, StyleControl } from "@/components/controls";
 
 defineProps();
 const schemaStore = SchemaStore();

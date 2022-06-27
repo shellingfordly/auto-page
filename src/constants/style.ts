@@ -7,4 +7,5 @@ export const STYLE_MAP: Record<StyleKeys, string> = {
   margin: "外边距",
   border: "边框",
   borderRadius: "圆角",
+  textAlign: "对齐方式",
 };

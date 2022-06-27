@@ -38,6 +38,5 @@ function onClick(image: any) {
   height: 300px;
   text-align: center;
   line-height: 300px;
-  border: 1px solid #eee;
 }
 </style>

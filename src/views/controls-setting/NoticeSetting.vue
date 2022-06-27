@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import ControlBox from "@/components/controls/ControlBox.vue";
-import StyleControl from "@/components/controls/StyleControl.vue";
-
 defineProps();
 </script>
 

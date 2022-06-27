@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { TextSchema } from "@/schemas";
 import { SchemaStore } from "@/store/modules/template";
+import { StyleControl } from "@/components/controls";
 
 defineProps();
 
@@ -18,7 +19,7 @@ function onChangeText(value: any) {
     <TextControl :model-value="textSchema.text" @change-text="onChangeText" />
   </ControlBox>
   <ControlBox title="文本样式">
-    <StyleControl />
+    <StyleControl :style="textSchema.style" />
   </ControlBox>
 </template>
 

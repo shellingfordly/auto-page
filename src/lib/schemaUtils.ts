@@ -12,6 +12,7 @@ import { ImageInfoType, SchemaItemType } from "@/types";
 export function createSchema(schema: SchemaItemType) {
   switch (schema.id) {
     case SchemaId.Image:
+      console.log("schema", new (schema as ImageSchema).constructorFunc());
       return new ImageSchema(schema as ImageSchema);
     case SchemaId.Container:
       return new ContainerSchema(schema as ContainerSchema);

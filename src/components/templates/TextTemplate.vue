@@ -18,6 +18,5 @@ defineProps<{ schema: TextSchema }>();
   height: 50px;
   text-align: center;
   line-height: 50px;
-  border: 1px solid #eee;
 }
 </style>

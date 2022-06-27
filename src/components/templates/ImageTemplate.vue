@@ -16,6 +16,5 @@ defineProps<{ schema: ImageSchema }>();
   height: 100px;
   text-align: center;
   line-height: 100px;
-  border: 1px solid #eee;
 }
 </style>
