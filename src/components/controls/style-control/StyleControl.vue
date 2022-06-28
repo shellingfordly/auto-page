@@ -1,30 +1,33 @@
 <script lang="ts" setup>
-import type { StyleKeys, StyleListItem, CSSProperties } from "@/types";
-import { STYLE_MAP } from "@/constants";
+import type { StyleKeys, StyleEmitItem } from "@/types";
+import StyleValue from "./components/StyleValue.vue";
+import { BaseStyle } from "@/schemas";
 
+const emit = defineEmits(["change-style"]);
 const props = defineProps<{
-  style: CSSProperties;
+  style: BaseStyle;
 }>();
 
-const styleList = computed(() => {
-  const style = props.style;
-  const list: StyleListItem[] = [];
-  if (!style) return list;
-  Object.keys(style).forEach((key) => {
-    list.push({
-      label: STYLE_MAP[key as StyleKeys],
-      value: key as StyleKeys,
-    });
-  });
-  return list;
+const baseStyle = computed<BaseStyle>(() => {
+  return new BaseStyle(props.style);
 });
+
+function onChange(item: StyleEmitItem) {
+  emit("change-style", item);
+}
 </script>
 
 <template>
-  <div class="container">
-    <div :class="$style.item" v-for="style in styleList">
-      <span :class="$style.controlItemLabel">{{ style.label }}：</span>
-      <a-input-number :class="$style.input" />
+  <div>
+    <div :class="$style.item" v-for="(value, key) in baseStyle" :key="key">
+      <div :class="$style.controlItemLabel">
+        {{ baseStyle.getLabel(key) }}：
+      </div>
+      <StyleValue
+        :value="(value as StrOrNum)"
+        :type="key"
+        @change="onChange($event)"
+      />
     </div>
   </div>
 </template>
@@ -34,15 +37,20 @@ const styleList = computed(() => {
 
 .item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
 
   .controlItemLabel {
-    width: 60px;
+    width: 70px;
+  }
+
+  .slider {
+    width: 80px;
   }
 
   .input {
-    width: 120px;
+    width: 70px;
   }
 }
 </style>

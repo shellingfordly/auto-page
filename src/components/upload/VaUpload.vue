@@ -14,7 +14,7 @@ const onProgress = (currentFile: FileItem) => {
 </script>
 
 <template>
-  <a-space direction="vertical" :style="{ width: '100%' }">
+  <a-space direction="vertical">
     <a-upload
       action="/"
       :fileList="file ? [file] : []"

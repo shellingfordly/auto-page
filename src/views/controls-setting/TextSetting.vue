@@ -1,15 +1,18 @@
 <script lang="ts" setup>
-import { TextSchema } from "@/schemas";
+import { StyleControl, TextControl, ControlBox } from "@/components/controls";
 import { SchemaStore } from "@/store/modules/template";
-import { StyleControl } from "@/components/controls";
-
-defineProps();
+import type { StyleEmitItem } from "@/types";
+import { TextSchema } from "@/schemas";
 
 const schemaStore = SchemaStore();
 const textSchema = computed(() => schemaStore.selectedSchema as TextSchema);
 
 function onChangeText(value: any) {
   textSchema.value.setText(value);
+}
+
+function onChangeStyle(item: StyleEmitItem) {
+  textSchema.value.style.setValue(item.key, item.value);
 }
 </script>
 
@@ -19,7 +22,7 @@ function onChangeText(value: any) {
     <TextControl :model-value="textSchema.text" @change-text="onChangeText" />
   </ControlBox>
   <ControlBox title="文本样式">
-    <StyleControl :style="textSchema.style" />
+    <StyleControl :style="textSchema.style" @change-style="onChangeStyle" />
   </ControlBox>
 </template>
 

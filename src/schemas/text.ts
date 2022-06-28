@@ -1,7 +1,8 @@
 import { SchemaId } from "@/enums/schema";
-import { BaseSchema } from "./base";
+import { BaseSchema } from ".";
+import { BaseSchemaApi, SchemaItemType } from "@/types";
 
-export class TextSchema extends BaseSchema {
+export class TextSchema extends BaseSchema implements BaseSchemaApi {
   public text = "This is TextSchema";
 
   constructor(schema?: TextSchema) {
@@ -10,9 +11,10 @@ export class TextSchema extends BaseSchema {
     this.name = "文本";
     this.icon = "bx:text";
     this.schemaId = Symbol(SchemaId.Text);
-    this.updateBaseStyle({
-      textAlign: "center",
-    });
+  }
+
+  newFunc(schema?: SchemaItemType) {
+    return new TextSchema(schema as TextSchema);
   }
 
   setText(value: string) {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { createWidgets, createSchema } from "@/lib";
+import { createWidgets } from "@/lib";
 import draggable from "vuedraggable";
 import Widget from "./Widget.vue";
 import { DRAGGABLE_GROUP } from "@/constants";
@@ -8,7 +8,7 @@ import type { SchemaItemType } from "@/types";
 const widgets = ref(createWidgets());
 
 function cloneSchema(schema: SchemaItemType) {
-  return createSchema(schema);
+  return schema.newFunc(schema);
 }
 </script>
 

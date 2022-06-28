@@ -4,3 +4,4 @@ export * from "./notice";
 export * from "./slideshow";
 export * from "./text";
 export * from "./base";
+export * from "./style";

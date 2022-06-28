@@ -1,12 +1,13 @@
 import { STYLE_MAP } from "@/constants";
 import type { SchemaId } from "@/enums/schema";
-import type { CSSProperties } from ".";
 import type {
   ContainerSchema,
   ImageSchema,
   TextSchema,
   NoticeSchema,
   SlideshowSchema,
+  BaseStyle,
+  StyleType,
 } from "../schemas";
 
 export type {
@@ -16,7 +17,21 @@ export type {
   NoticeSchema,
   SlideshowSchema,
   SchemaId,
+  BaseStyle,
+  StyleType,
 };
+
+export interface BaseSchemaApi {
+  id: SchemaId | undefined;
+  name: string | undefined;
+  icon: string | undefined;
+  schemaId: Symbol | undefined;
+  status: boolean;
+  selected: boolean;
+  link: string | undefined;
+  style: StyleType;
+  newFunc: (schema?: SchemaItemType) => SchemaItemType;
+}
 
 export type SchemaItemType =
   | ImageSchema
@@ -37,9 +52,9 @@ export interface ImageInfoType {
   link?: string;
 }
 
-export type StyleKeys = keyof CSSProperties;
+export type StyleKeys = keyof BaseStyle;
 
-export interface StyleListItem {
-  label: ValueOf<typeof STYLE_MAP>;
-  value: StyleKeys;
+export interface StyleEmitItem {
+  key: StyleKeys;
+  value: ValueOf<StyleType>;
 }

@@ -23,7 +23,7 @@ function onChangeLink(value: string) {
       <Icon @click="$emit('delete')" :class="$style.delete" icon="ep:delete" />
     </a-tooltip>
     <div :class="$style.item">
-      <span :class="$style.controlItemLabel"> 上传图片： </span>
+      <div :class="$style.controlItemLabel">上传图片：</div>
       <VaUpload :file="file" />
     </div>
     <div :class="$style.item">
@@ -58,7 +58,7 @@ function onChangeLink(value: string) {
     }
 
     .input {
-      width: initial;
+      width: calc(100% - 80px);
     }
   }
 }

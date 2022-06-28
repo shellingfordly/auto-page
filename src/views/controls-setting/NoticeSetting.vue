@@ -4,10 +4,10 @@ defineProps();
 
 <template>
   <div :class="$style.controlTitle">公告设置</div>
-  <ControlBox title="公共详情">
+  <ControlBox title="公告详情">
     <TextControl />
   </ControlBox>
-  <ControlBox title="公共样式">
+  <ControlBox title="公告样式">
     <StyleControl />
   </ControlBox>
 </template>

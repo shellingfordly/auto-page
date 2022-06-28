@@ -1,16 +1,15 @@
 import { SchemaId } from "@/enums/schema";
 import { createImageInfo } from "@/lib";
-import type { ImageInfoType } from "@/types";
+import type { ImageInfoType, BaseSchemaApi, SchemaItemType } from "@/types";
 import { BaseSchema } from "./base";
 
-export class SlideshowSchema extends BaseSchema {
+const url =
+  "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp";
+
+export class SlideshowSchema extends BaseSchema implements BaseSchemaApi {
   public list: ImageInfoType[] = [
-    createImageInfo({
-      url: "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp",
-    }),
-    createImageInfo({
-      url: "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp",
-    }),
+    createImageInfo({ url }),
+    createImageInfo({ url }),
   ];
 
   constructor(schema?: SlideshowSchema) {
@@ -19,6 +18,10 @@ export class SlideshowSchema extends BaseSchema {
     this.name = "轮播图";
     this.icon = "ri:slideshow-2-line";
     this.schemaId = Symbol(SchemaId.Slideshow);
+  }
+
+  newFunc(schema?: SchemaItemType) {
+    return new SlideshowSchema(schema as SlideshowSchema);
   }
 
   addSlideshowItem(item: Partial<ImageInfoType>) {

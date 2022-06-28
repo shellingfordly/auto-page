@@ -1,9 +1,10 @@
 import { SchemaId } from "@/enums/schema";
 import { createImageInfo } from "@/lib";
-import type { ImageInfoType } from "@/types";
+import type { ImageInfoType, SchemaItemType } from "@/types";
 import { BaseSchema } from "./base";
+import { BaseSchemaApi } from "@/types";
 
-export class ImageSchema extends BaseSchema {
+export class ImageSchema extends BaseSchema implements BaseSchemaApi {
   public contents: any[] = [];
   public info: ImageInfoType;
 
@@ -14,6 +15,10 @@ export class ImageSchema extends BaseSchema {
     this.icon = "clarity:image-line";
     this.schemaId = Symbol(SchemaId.Image);
     this.info = createImageInfo({});
+  }
+
+  newFunc(schema?: SchemaItemType) {
+    return new ImageSchema(schema as ImageSchema);
   }
 
   setImageInfo(item: Partial<ImageInfoType>) {

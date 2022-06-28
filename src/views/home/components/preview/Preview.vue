@@ -5,6 +5,13 @@ import { SchemaItemType } from "@/types";
 import draggable from "vuedraggable";
 
 const content = ref<SchemaItemType[]>([]);
+watch(
+  content,
+  () => {
+    console.log("content", content);
+  },
+  { deep: true }
+);
 </script>
 
 <template>
