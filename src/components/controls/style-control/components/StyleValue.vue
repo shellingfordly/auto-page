@@ -8,7 +8,7 @@ import {
 
 const emit = defineEmits(["change"]);
 const props = defineProps<{ value: StrOrNum; type: StyleKeys }>();
-const percent = ref();
+const percent = ref(props.value as number);
 function onChange(value: ValueOf<StyleType>) {
   emit("change", { key: props.type, value });
 }
@@ -31,14 +31,14 @@ function onChange(value: ValueOf<StyleType>) {
     <a-slider
       v-model="percent"
       :class="$style.slider"
-      :max="100"
-      :step="1"
+      :max="1000"
+      :step="10"
       @change="onChange"
     />
     <a-input-number
       v-model="percent"
       :min="0"
-      :max="100"
+      :max="1000"
       :class="$style.input"
       @change="onChange"
       @input="onChange"

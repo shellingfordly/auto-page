@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { SchemaStore } from "@/store/modules/template";
 import type { SlideshowSchema } from "@/schemas";
-import type { ImageInfoType } from "@/types";
+import type { ImageInfoType, StyleEmitItem } from "@/types";
 import { ImageControl, ControlBox, StyleControl } from "@/components/controls";
 
 defineProps();
@@ -16,6 +16,10 @@ function onDelete(item: ImageInfoType) {
 
 function onChangeLink(link: string, item: ImageInfoType) {
   slideshowSchema.value.updateSlideshowItem({ ...item, link });
+}
+
+function onChangeStyle(item: StyleEmitItem) {
+  slideshowSchema.value.style.setValue(item.key, item.value);
 }
 </script>
 
@@ -37,7 +41,10 @@ function onChangeLink(link: string, item: ImageInfoType) {
   </ControlBox>
   <ControlBox title="轮播图配置"> </ControlBox>
   <ControlBox title="轮播图样式">
-    <StyleControl :style="slideshowSchema.style" />
+    <StyleControl
+      :style="slideshowSchema.style"
+      @change-style="onChangeStyle"
+    />
   </ControlBox>
 </template>
 

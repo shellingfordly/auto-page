@@ -1,5 +1,5 @@
 import { SchemaId } from "@/types";
-import { BaseStyle } from "./style";
+import { BaseStyle } from ".";
 
 export class BaseSchema {
   public id: SchemaId | undefined;
@@ -7,7 +7,6 @@ export class BaseSchema {
   public icon: string | undefined;
   public schemaId: Symbol | undefined;
   public status = false;
-  public selected = false;
   public link: string | undefined;
   public style: BaseStyle;
 
@@ -15,7 +14,7 @@ export class BaseSchema {
     this.style = new BaseStyle();
   }
 
-  setSelected(bool: boolean) {
-    this.selected = bool;
+  get getStyle() {
+    return this.style.getStyle(this.style);
   }
 }

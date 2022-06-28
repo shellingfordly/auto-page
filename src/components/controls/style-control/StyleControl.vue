@@ -2,14 +2,25 @@
 import type { StyleKeys, StyleEmitItem } from "@/types";
 import StyleValue from "./components/StyleValue.vue";
 import { BaseStyle } from "@/schemas";
+import { isFunction } from "lodash";
 
 const emit = defineEmits(["change-style"]);
 const props = defineProps<{
   style: BaseStyle;
 }>();
 
-const baseStyle = computed<BaseStyle>(() => {
-  return new BaseStyle(props.style);
+const defaultStyle = new BaseStyle();
+const baseStyle = computed(() => {
+  defaultStyle.setStyleValue(props.style);
+  const result: Record<StyleKeys, UndOf<StrOrNum>> = {} as any;
+  const keys = Object.keys(defaultStyle) as StyleKeys[];
+  keys.forEach((key: StyleKeys) => {
+    const item = defaultStyle[key];
+    if (item !== undefined && !isFunction(item)) {
+      result[key] = item;
+    }
+  });
+  return result;
 });
 
 function onChange(item: StyleEmitItem) {
@@ -21,7 +32,7 @@ function onChange(item: StyleEmitItem) {
   <div>
     <div :class="$style.item" v-for="(value, key) in baseStyle" :key="key">
       <div :class="$style.controlItemLabel">
-        {{ baseStyle.getLabel(key) }}：
+        {{ defaultStyle.getLabel(key) }}：
       </div>
       <StyleValue
         :value="(value as StrOrNum)"

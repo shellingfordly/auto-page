@@ -6,6 +6,7 @@ import {
   TextSetting,
   NoticeSetting,
   SlideshowSetting,
+  ContainerSetting,
 } from "@/views/controls-setting";
 
 const schemaStore = SchemaStore();
@@ -15,7 +16,7 @@ const comp = computed(() => {
     case SchemaId.Image:
       return ImageSetting;
     case SchemaId.Container:
-      return null;
+      return ContainerSetting;
     case SchemaId.Slideshow:
       return SlideshowSetting;
     case SchemaId.Notice:
@@ -23,7 +24,7 @@ const comp = computed(() => {
     case SchemaId.Text:
       return TextSetting;
     default:
-      break;
+      return;
   }
 });
 </script>

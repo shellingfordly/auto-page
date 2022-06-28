@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { SlideshowSchema } from "@/schemas";
 
-defineProps<{ schema: SlideshowSchema }>();
+const props = defineProps<{ schema: SlideshowSchema }>();
+const style = computed(() => props.schema.getStyle);
 
 function onClick(image: any) {
   image.link && window.open(image);
@@ -10,11 +11,11 @@ function onClick(image: any) {
 
 <template>
   <BorderContainer :schema="schema">
-    <div :class="$style.container">
+    <div :style="style">
       <a-carousel
         :style="{
           width: '100%',
-          height: '300px',
+          height: '100%',
         }"
         :default-current="2"
       >
@@ -31,12 +32,3 @@ function onClick(image: any) {
     </div>
   </BorderContainer>
 </template>
-
-<style module scoped lang="less">
-.container {
-  width: 100%;
-  height: 300px;
-  text-align: center;
-  line-height: 300px;
-}
-</style>

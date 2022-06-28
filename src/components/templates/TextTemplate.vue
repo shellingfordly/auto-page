@@ -1,22 +1,14 @@
 <script lang="ts" setup>
 import { TextSchema } from "@/schemas";
 
-defineProps<{ schema: TextSchema }>();
+const props = defineProps<{ schema: TextSchema }>();
+const style = computed(() => props.schema.getStyle);
 </script>
 
 <template>
   <BorderContainer :schema="schema">
-    <div :class="$style.container">
+    <div :style="style">
       {{ schema.text }}
     </div>
   </BorderContainer>
 </template>
-
-<style module scoped lang="less">
-.container {
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-}
-</style>

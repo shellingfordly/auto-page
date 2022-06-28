@@ -1,20 +1,12 @@
 <script lang="ts" setup>
 import { NoticeSchema } from "@/schemas";
 
-defineProps<{ schema: NoticeSchema }>();
+const props = defineProps<{ schema: NoticeSchema }>();
+const style = computed(() => props.schema.getStyle);
 </script>
 
 <template>
   <BorderContainer :schema="schema">
-    <div :class="$style.container">This si a NoticeSchema</div>
+    <div :style="style">This si a NoticeSchema</div>
   </BorderContainer>
 </template>
-
-<style module scoped lang="less">
-.container {
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-}
-</style>

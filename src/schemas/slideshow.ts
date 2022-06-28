@@ -1,7 +1,7 @@
 import { SchemaId } from "@/enums/schema";
 import { createImageInfo } from "@/lib";
-import type { ImageInfoType, BaseSchemaApi, SchemaItemType } from "@/types";
-import { BaseSchema } from "./base";
+import { ImageInfoType, BaseSchemaApi, SchemaItemType } from "@/types";
+import { BaseSchema, BaseStyle } from ".";
 
 const url =
   "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp";
@@ -18,6 +18,9 @@ export class SlideshowSchema extends BaseSchema implements BaseSchemaApi {
     this.name = "轮播图";
     this.icon = "ri:slideshow-2-line";
     this.schemaId = Symbol(SchemaId.Slideshow);
+    this.style = new BaseStyle({
+      height: 300,
+    });
   }
 
   newFunc(schema?: SchemaItemType) {

@@ -3,6 +3,10 @@ import WidgetsContainer from "./components/widget/WidgetsContainer.vue";
 import TemplatePreview from "./components/preview/Preview.vue";
 import TransitionContainer from "@/components/container/TransitionContainer.vue";
 import ControlSetting from "./components/control/ControlSetting.vue";
+import { BaseStyle } from "@/schemas";
+
+const style = new BaseStyle();
+console.log("style", style);
 
 onMounted(() => {
   // window.onbeforeunload = () => true;

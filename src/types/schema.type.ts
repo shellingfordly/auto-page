@@ -27,7 +27,6 @@ export interface BaseSchemaApi {
   icon: string | undefined;
   schemaId: Symbol | undefined;
   status: boolean;
-  selected: boolean;
   link: string | undefined;
   style: StyleType;
   newFunc: (schema?: SchemaItemType) => SchemaItemType;

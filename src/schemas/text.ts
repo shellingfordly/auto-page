@@ -1,5 +1,5 @@
 import { SchemaId } from "@/enums/schema";
-import { BaseSchema } from ".";
+import { BaseSchema, BaseStyle } from ".";
 import { BaseSchemaApi, SchemaItemType } from "@/types";
 
 export class TextSchema extends BaseSchema implements BaseSchemaApi {
@@ -11,6 +11,10 @@ export class TextSchema extends BaseSchema implements BaseSchemaApi {
     this.name = "文本";
     this.icon = "bx:text";
     this.schemaId = Symbol(SchemaId.Text);
+    this.style = new BaseStyle({
+      width: 100,
+      height: 50,
+    });
   }
 
   newFunc(schema?: SchemaItemType) {
