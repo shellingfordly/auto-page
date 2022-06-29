@@ -1,21 +1,16 @@
 import { SchemaId } from "@/enums/schema";
 import { BaseSchema, BaseStyle } from ".";
-import { BaseSchemaApi, SchemaItemType } from "@/types";
 
-export class ContainerSchema extends BaseSchema implements BaseSchemaApi {
-  name = "容器";
-  icon = "charm:container";
-  id = SchemaId.Container;
-  schemaId = Symbol(SchemaId.Container);
-  style = new BaseStyle({
-    backgroundColor: "red",
+export class ContainerSchema extends BaseSchema {
+  public name = "容器";
+  public icon = "charm:container";
+  public id = SchemaId.Container;
+  public schemaId = Symbol(SchemaId.Container);
+  public style = new BaseStyle({
+    height: 300,
   });
 
   constructor(schema?: ContainerSchema) {
     super();
-  }
-
-  newFunc(schema?: SchemaItemType) {
-    return new ContainerSchema(schema as ContainerSchema);
   }
 }

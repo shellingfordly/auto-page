@@ -8,7 +8,7 @@ import {
 
 const emit = defineEmits(["change"]);
 const props = defineProps<{ value: StrOrNum; type: StyleKeys }>();
-const percent = ref(props.value as number);
+const percent = ref(props.value as any);
 function onChange(value: ValueOf<StyleType>) {
   emit("change", { key: props.type, value });
 }
@@ -27,19 +27,21 @@ function onChange(value: ValueOf<StyleType>) {
       <a-radio value="right"><icon-align-right /></a-radio>
     </a-radio-group>
   </template>
-  <template v-else>
-    <a-slider
+  <template v-else-if="type.toLowerCase().includes('color')">
+    <a-input
       v-model="percent"
-      :class="$style.slider"
-      :max="1000"
-      :step="10"
+      :class="$style.input"
       @change="onChange"
+      @input="onChange"
     />
+  </template>
+  <template v-else>
     <a-input-number
       v-model="percent"
       :min="0"
       :max="1000"
       :class="$style.input"
+      placeholder="自适应"
       @change="onChange"
       @input="onChange"
     />
@@ -47,15 +49,11 @@ function onChange(value: ValueOf<StyleType>) {
 </template>
 
 <style module scoped lang="less">
-.group {
-  justify-self: center;
-}
-
 .slider {
   width: 80px;
 }
 
 .input {
-  width: 70px;
+  width: 126px;
 }
 </style>

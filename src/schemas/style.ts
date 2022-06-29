@@ -1,18 +1,22 @@
-import type { CSSProperties, StyleKeys } from "@/types";
+import type { CSSProperties } from "@/types";
 import "reflect-metadata";
 
 type TextAlignType = "left" | "right" | "center";
 
 export interface StyleType {
-  width?: number;
-  height?: number;
-  padding?: number;
-  margin?: number;
-  border?: number;
-  borderRadius?: number;
-  textAlign?: TextAlignType;
-  backgroundColor?: string;
+  width: number | null;
+  height: number | null;
+  padding: number | null;
+  margin: number | null;
+  border: number | null;
+  borderRadius: number | null;
+  textAlign: TextAlignType | null;
+  backgroundColor: string | null;
+  position: string | null;
+  zIndex: number | null;
 }
+
+export type StyleKeys = keyof StyleType;
 
 const LabelKey = Symbol("label");
 const UnitKey = Symbol("label");
@@ -34,61 +38,66 @@ export function getLabel(target: any, propertyKey: StyleKeys) {
 }
 
 export class BaseStyle implements StyleType {
-  @unit("%")
+  @unit("px")
   @label("宽度")
-  width = 100;
+  width: number | null = null;
   @unit("px")
   @label("高度")
-  height?: number;
+  height: number | null = null;
   @unit("px")
   @label("内边距")
-  padding?: number;
+  padding: number | null = null;
   @unit("px")
   @label("外边距")
-  margin?: number;
+  margin: number | null = null;
   @unit("px")
   @label("边框")
-  border?: number;
+  border: number | null = null;
   @unit("px")
   @label("圆角")
-  borderRadius?: number;
+  borderRadius: number | null = null;
   @unit("px")
   @label("字体大小")
-  fontSize?: number;
+  fontSize: number | null = null;
   @label("对齐方式")
-  textAlign?: TextAlignType;
+  textAlign: TextAlignType | null = null;
   @label("背景色")
-  backgroundColor?: string;
+  backgroundColor: string | null = null;
+  @label("文本颜色")
+  color: string | null = null;
+  @label("浮动")
+  position: string | null = null;
+  @label("层级")
+  zIndex: number | null = null;
 
   constructor(style?: Partial<BaseStyle>) {
-    if (style) {
-      this.setStyleValue(style);
-    }
+    style && this.initValue(style);
   }
 
-  setStyleValue(style: Partial<BaseStyle>) {
-    (Object.keys(style) as StyleKeys[]).forEach((key) => {
-      (this as any)[key] = style[key];
-    });
+  getStyleKeys(style: Partial<BaseStyle>) {
+    return Object.keys(style) as StyleKeys[];
+  }
+
+  initValue(style: Partial<BaseStyle>) {
+    this.getStyleKeys(style).forEach(
+      (key) => (this[key] = style[key] as never)
+    );
   }
 
   getStyle(style: BaseStyle) {
-    const result: any = {};
-    Object.keys(style).forEach((key) => {
-      const _key = key as StyleKeys;
-      const value = style[_key];
-      if (value) {
-        result[_key] = value + getUnit(this, _key);
+    return this.getStyleKeys(style).reduce((p, next) => {
+      if (style[next]) {
+        p[next] = style[next] + getUnit(this, next);
       }
-    });
-    return result as CSSProperties;
+      return p;
+    }, {} as CSSProperties);
   }
 
   getLabel(key: StyleKeys) {
     return getLabel(this, key);
   }
 
-  setValue(key: StyleKeys, value: UndOf<StrOrNum>) {
-    (this as any)[key] = value;
+  setValue(key: StyleKeys, value: ValueOf<StyleType>) {
+    this[key] = value as never;
   }
 }

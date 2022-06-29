@@ -6,9 +6,10 @@ const schemaStore = SchemaStore();
 const containerSchema = computed(
   () => schemaStore.selectedSchema as ContainerSchema
 );
+const { style } = unref(containerSchema);
 
 function onChangeStyle(item: StyleEmitItem) {
-  containerSchema.value.style.setValue(item.key, item.value);
+  style.setValue(item.key, item.value);
 }
 </script>
 

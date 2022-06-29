@@ -25,6 +25,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "build/**/*.ts",
-    "*.d.ts"
+    "./*.d.ts",
+    "./auto-imports.d.ts",
+    "./components.d.ts",
+    "./env.d.ts"
   ]
 }

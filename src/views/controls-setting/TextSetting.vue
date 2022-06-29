@@ -3,25 +3,25 @@ import { StyleControl, TextControl, ControlBox } from "@/components/controls";
 import { SchemaStore } from "@/store/modules/template";
 import type { StyleEmitItem } from "@/types";
 import { TextSchema } from "@/schemas";
+import FloatControl from "@/components/controls/FloatControl.vue";
 
 const schemaStore = SchemaStore();
 const textSchema = computed(() => schemaStore.selectedSchema as TextSchema);
 
-function onChangeText(value: any) {
-  textSchema.value.setText(value);
-}
-
 function onChangeStyle(item: StyleEmitItem) {
-  textSchema.value.style.setValue(item.key, item.value);
+  unref(textSchema).style.setValue(item.key, item.value);
 }
 </script>
 
 <template>
   <div :class="$style.controlTitle">文本设置</div>
-  <ControlBox title="文本详情">
-    <TextControl :model-value="textSchema.text" @change-text="onChangeText" />
+  <ControlBox title="详情">
+    <TextControl v-model:value="textSchema.text" />
   </ControlBox>
-  <ControlBox title="文本样式">
+  <ControlBox title="布局">
+    <FloatControl />
+  </ControlBox>
+  <ControlBox title="样式">
     <StyleControl :style="textSchema.style" @change-style="onChangeStyle" />
   </ControlBox>
 </template>

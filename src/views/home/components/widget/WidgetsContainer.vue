@@ -18,6 +18,7 @@ function cloneSchema(schema: SchemaItemType) {
     :list="widgets"
     :group="{ name: DRAGGABLE_GROUP, pull: 'clone', put: false }"
     :clone="cloneSchema"
+    :draggable="false"
     item-key="id"
   >
     <template #item="{ element }">

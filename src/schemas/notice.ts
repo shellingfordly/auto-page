@@ -1,20 +1,19 @@
 import { SchemaId } from "@/enums/schema";
-import { BaseSchema } from "./base";
-import { BaseSchemaApi, SchemaItemType } from "@/types";
+import { BaseSchema, BaseStyle } from ".";
 
-export class NoticeSchema extends BaseSchema implements BaseSchemaApi {
+export class NoticeSchema extends BaseSchema {
+  public id = SchemaId.Notice;
+  public name = "公告";
+  public icon = "fe:notice-active";
+  public schemaId = Symbol(SchemaId.Notice);
   public text = "This is NoticeSchema";
 
   constructor(schema?: NoticeSchema) {
     super();
-    this.id = SchemaId.Notice;
-    this.name = "公告";
-    this.icon = "fe:notice-active";
-    this.schemaId = Symbol(SchemaId.Notice);
-  }
-
-  newFunc(schema?: SchemaItemType) {
-    return new NoticeSchema(schema as NoticeSchema);
+    this.style = new BaseStyle({
+      height: 30,
+      padding: 0,
+    });
   }
 
   setText(text: string) {

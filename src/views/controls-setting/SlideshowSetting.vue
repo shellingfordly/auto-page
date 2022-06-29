@@ -1,26 +1,26 @@
 <script lang="ts" setup>
 import { SchemaStore } from "@/store/modules/template";
-import type { SlideshowSchema } from "@/schemas";
-import type { ImageInfoType, StyleEmitItem } from "@/types";
-import { ImageControl, ControlBox, StyleControl } from "@/components/controls";
+import type { StyleEmitItem, SlideshowSchema } from "@/types";
+import {
+  ImageControl,
+  ControlBox,
+  StyleControl,
+  SlideshowControl,
+} from "@/components/controls";
 
 defineProps();
 const schemaStore = SchemaStore();
 const slideshowSchema = computed(
   () => schemaStore.selectedSchema as SlideshowSchema
 );
+const { style, addSlideshowItem, removeSlideshowItem, updateSlideshowItem } =
+  unref(slideshowSchema);
 
-function onDelete(item: ImageInfoType) {
-  slideshowSchema.value.removeSlideshowItem(item.uid);
-}
-
-function onChangeLink(link: string, item: ImageInfoType) {
-  slideshowSchema.value.updateSlideshowItem({ ...item, link });
-}
-
-function onChangeStyle(item: StyleEmitItem) {
-  slideshowSchema.value.style.setValue(item.key, item.value);
-}
+const onAddItem = addSlideshowItem.bind(slideshowSchema.value);
+const onDelete = removeSlideshowItem.bind(slideshowSchema.value);
+const onUpdateItem = updateSlideshowItem.bind(slideshowSchema.value);
+const onChangeStyle = (item: StyleEmitItem) =>
+  style.setValue(item.key, item.value);
 </script>
 
 <template>
@@ -32,14 +32,14 @@ function onChangeStyle(item: StyleEmitItem) {
       v-for="image in slideshowSchema.list"
       :key="image.url"
       :deleteIcon="true"
-      @delete="onDelete(image)"
-      @change-link="(link) => onChangeLink(link, image)"
+      @delete="onDelete(image.uid)"
+      @change-link="onUpdateItem"
     />
-    <a-button long @click="slideshowSchema.addSlideshowItem({})">
-      Add Item
-    </a-button>
+    <a-button long @click="onAddItem({})"> Add Item </a-button>
   </ControlBox>
-  <ControlBox title="轮播图配置"> </ControlBox>
+  <ControlBox title="轮播图配置">
+    <SlideshowControl />
+  </ControlBox>
   <ControlBox title="轮播图样式">
     <StyleControl
       :style="slideshowSchema.style"

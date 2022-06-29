@@ -9,11 +9,12 @@ const emit = defineEmits(["delete", "change-link", "change-img"]);
 const props = defineProps<{ image: ImageInfoType; deleteIcon?: boolean }>();
 const file = computed(() => {
   const url = props.image.url;
-  if (url) return createImageInfo({ url }) as unknown as FileItem;
+  if (!url) return;
+  return createImageInfo({ url }) as unknown as FileItem;
 });
 
 function onChangeLink(value: string) {
-  emit("change-link", value);
+  emit("change-link", { ...props.image, link: value });
 }
 </script>
 

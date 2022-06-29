@@ -7,6 +7,6 @@ const style = computed(() => props.schema.getStyle);
 
 <template>
   <BorderContainer :schema="schema">
-    <div :style="style">{{ schema.info.link }}</div>
+    <img :style="style" :src="schema.info.url" />
   </BorderContainer>
 </template>

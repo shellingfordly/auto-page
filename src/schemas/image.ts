@@ -1,24 +1,25 @@
 import { SchemaId } from "@/enums/schema";
 import { createImageInfo } from "@/lib";
-import type { ImageInfoType, SchemaItemType } from "@/types";
-import { BaseSchema } from "./base";
-import { BaseSchemaApi } from "@/types";
+import { ImageInfoType } from "@/types";
+import { BaseSchema, BaseStyle } from ".";
 
-export class ImageSchema extends BaseSchema implements BaseSchemaApi {
-  public contents: any[] = [];
-  public info: ImageInfoType;
+const url =
+  "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp";
+
+export class ImageSchema extends BaseSchema {
+  public id = SchemaId.Image;
+  public name = "图片";
+  public icon = "clarity:image-line";
+  public schemaId = Symbol(SchemaId.Image);
+  public info = createImageInfo({
+    url,
+  });
 
   constructor(schema?: ImageSchema) {
     super();
-    this.id = SchemaId.Image;
-    this.name = "图片";
-    this.icon = "clarity:image-line";
-    this.schemaId = Symbol(SchemaId.Image);
-    this.info = createImageInfo({});
-  }
-
-  newFunc(schema?: SchemaItemType) {
-    return new ImageSchema(schema as ImageSchema);
+    this.style = new BaseStyle({
+      height: 100,
+    });
   }
 
   setImageInfo(item: Partial<ImageInfoType>) {

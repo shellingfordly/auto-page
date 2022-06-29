@@ -7,6 +7,6 @@ const style = computed(() => props.schema.getStyle);
 
 <template>
   <BorderContainer :schema="schema">
-    <div :style="style">This si a NoticeSchema</div>
+    <div :style="style">{{ schema.text }}</div>
   </BorderContainer>
 </template>

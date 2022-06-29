@@ -1,4 +1,3 @@
-import { STYLE_MAP } from "@/constants";
 import type { SchemaId } from "@/enums/schema";
 import type {
   ContainerSchema,
@@ -8,6 +7,7 @@ import type {
   SlideshowSchema,
   BaseStyle,
   StyleType,
+  StyleKeys,
 } from "../schemas";
 
 export type {
@@ -19,18 +19,8 @@ export type {
   SchemaId,
   BaseStyle,
   StyleType,
+  StyleKeys,
 };
-
-export interface BaseSchemaApi {
-  id: SchemaId | undefined;
-  name: string | undefined;
-  icon: string | undefined;
-  schemaId: Symbol | undefined;
-  status: boolean;
-  link: string | undefined;
-  style: StyleType;
-  newFunc: (schema?: SchemaItemType) => SchemaItemType;
-}
 
 export type SchemaItemType =
   | ImageSchema
@@ -50,8 +40,6 @@ export interface ImageInfoType {
   url: string;
   link?: string;
 }
-
-export type StyleKeys = keyof BaseStyle;
 
 export interface StyleEmitItem {
   key: StyleKeys;
