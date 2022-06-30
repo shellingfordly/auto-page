@@ -1,19 +1,22 @@
-import {
-  IndicatorPosition,
-  SchemaId,
-  IndicatorType,
-  AnimationName,
-} from "@/enums/schema";
+import { SchemaId } from "@/enums/schema";
 import { createImageInfo } from "@/lib";
-import type { ImageInfoType, CarouselAutoPlayConfig } from "@/types";
+import type {
+  ImageInfoType,
+  CarouselAutoPlayConfig,
+  CarouselAnimationName,
+  CarouselIndicatorType,
+  CarouselDirection,
+  CarouselIndicatorPosition,
+} from "@/types";
 import { BaseSchema, BaseStyle } from ".";
 
 export interface SlideshowConfigType {
   autoPlay: boolean | CarouselAutoPlayConfig;
   moveSpeed?: number;
-  indicatorType?: IndicatorType;
-  indicatorPosition?: IndicatorPosition;
-  animationName?: AnimationName;
+  indicatorType?: CarouselIndicatorType;
+  indicatorPosition?: CarouselIndicatorPosition;
+  animationName?: CarouselAnimationName;
+  direction?: CarouselDirection;
 }
 
 const url =
@@ -35,26 +38,31 @@ export class SlideshowSchema extends BaseSchema {
     this.style = new BaseStyle({
       height: 300,
       padding: 0,
+      backgroundColor: "white",
     });
     this.config = {
       autoPlay: false,
       moveSpeed: 500,
-      animationName: AnimationName.Fade,
-      indicatorType: IndicatorType.Dot,
+      direction: "horizontal",
+      animationName: "fade",
+      indicatorType: "dot",
     };
   }
 
-  addSlideshowItem(item: Partial<ImageInfoType>) {
+  addItem(item: Partial<ImageInfoType>) {
     this.list.push(createImageInfo(item));
   }
 
-  removeSlideshowItem(uid: Symbol) {
+  removeItem(uid: Symbol) {
     this.list = this.list.filter((v) => v.uid !== uid);
   }
 
-  updateSlideshowItem(item: ImageInfoType) {
-    const index = this.list.findIndex((v) => v.uid === item.uid);
-    this.list.splice(index, 1, { ...this.list[index], ...item });
+  updateItem(item: ImageInfoType) {
+    this.list = this.list.map((v) => {
+      if (v.uid === item.uid) {
+        return { ...v, ...item };
+      } else return v;
+    });
   }
 
   setConfig(

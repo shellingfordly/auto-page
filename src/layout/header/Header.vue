@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 const isDark = ref(false);
 
+onClick();
+
 function onClick() {
   if (!isDark.value) {
     isDark.value = true;

@@ -3,11 +3,6 @@ import WidgetsContainer from "./components/widget/WidgetsContainer.vue";
 import TemplatePreview from "./components/preview/Preview.vue";
 import TransitionContainer from "@/components/container/TransitionContainer.vue";
 import ControlSetting from "./components/control/ControlSetting.vue";
-import { BaseSchema, BaseStyle } from "@/schemas";
-
-const style = new BaseStyle();
-console.log("style", style);
-console.log("new BaseSchema()", new BaseSchema());
 
 onMounted(() => {
   // window.onbeforeunload = () => true;
@@ -55,7 +50,7 @@ onUnmounted(() => {
 
   &Right {
     right: 0;
-    width: 300px;
+    width: 400px;
     border-left: @borderStyle;
   }
 }

@@ -13,12 +13,11 @@ const schemaStore = SchemaStore();
 const slideshowSchema = computed(
   () => schemaStore.selectedSchema as SlideshowSchema
 );
-const { style, addSlideshowItem, removeSlideshowItem, updateSlideshowItem } =
-  unref(slideshowSchema);
+const { style, addItem, removeItem, updateItem } = unref(slideshowSchema);
 
-const onAddItem = addSlideshowItem.bind(slideshowSchema.value);
-const onDelete = removeSlideshowItem.bind(slideshowSchema.value);
-const onUpdateItem = updateSlideshowItem.bind(slideshowSchema.value);
+const onAddItem = addItem.bind(slideshowSchema.value);
+const onDelete = removeItem.bind(slideshowSchema.value);
+const onUpdateItem = updateItem.bind(slideshowSchema.value);
 const onChangeStyle = (item: StyleEmitItem) =>
   style.setValue(item.key, item.value);
 </script>
