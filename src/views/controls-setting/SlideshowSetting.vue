@@ -18,8 +18,6 @@ const { style, addItem, removeItem, updateItem } = unref(slideshowSchema);
 const onAddItem = addItem.bind(slideshowSchema.value);
 const onDelete = removeItem.bind(slideshowSchema.value);
 const onUpdateItem = updateItem.bind(slideshowSchema.value);
-const onChangeStyle = (item: StyleEmitItem) =>
-  style.setValue(item.key, item.value);
 </script>
 
 <template>
@@ -40,10 +38,7 @@ const onChangeStyle = (item: StyleEmitItem) =>
     <SlideshowControl />
   </ControlBox>
   <ControlBox title="轮播图样式">
-    <StyleControl
-      :style="slideshowSchema.style"
-      @change-style="onChangeStyle"
-    />
+    <StyleControl />
   </ControlBox>
 </template>
 

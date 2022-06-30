@@ -20,7 +20,7 @@ function onClick() {
 </script>
 
 <template>
-  <div :class="className" @click="onClick">
+  <div :class="className" @click="onClick" v-bind="$attrs">
     <slot />
   </div>
 </template>

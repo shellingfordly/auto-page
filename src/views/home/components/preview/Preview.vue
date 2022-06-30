@@ -5,6 +5,8 @@ import { SchemaItemType } from "@/types";
 import draggable from "vuedraggable";
 
 const content = ref<SchemaItemType[]>([]);
+
+function dragover(event: any) {}
 </script>
 
 <template>
@@ -17,6 +19,7 @@ const content = ref<SchemaItemType[]>([]);
           item-key="schemaId"
           ghost-class="ghost-item"
           :group="DRAGGABLE_GROUP"
+          @dragover="dragover"
         >
           <template #item="{ element }">
             <SchemaTemplate :schema="element" />
@@ -49,6 +52,7 @@ const content = ref<SchemaItemType[]>([]);
       overflow-x: hidden;
 
       .draggable {
+        position: relative;
         height: 100%;
       }
     }

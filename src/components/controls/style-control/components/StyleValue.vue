@@ -7,8 +7,8 @@ import {
 } from "@arco-design/web-vue/es/icon";
 
 const emit = defineEmits(["change"]);
-const props = defineProps<{ value: StrOrNum; type: StyleKeys }>();
-const percent = ref(props.value as any);
+const props = defineProps<{ value: NullOf<StrOrNum>; type: StyleKeys }>();
+const percent = computed(() => props.value as any);
 function onChange(value: ValueOf<StyleType>) {
   emit("change", { key: props.type, value });
 }
@@ -18,7 +18,7 @@ function onChange(value: ValueOf<StyleType>) {
   <template v-if="type === 'textAlign'">
     <a-radio-group
       type="button"
-      :model-value="value"
+      :model-value="percent"
       :class="$style.group"
       @change="onChange"
     >
@@ -29,7 +29,7 @@ function onChange(value: ValueOf<StyleType>) {
   </template>
   <template v-else-if="type.toLowerCase().includes('color')">
     <a-input
-      v-model="percent"
+      :model-value="percent"
       :class="$style.input"
       @change="onChange"
       @input="onChange"
@@ -37,7 +37,7 @@ function onChange(value: ValueOf<StyleType>) {
   </template>
   <template v-else>
     <a-input-number
-      v-model="percent"
+      :model-value="percent"
       :min="0"
       :max="1000"
       :class="$style.input"

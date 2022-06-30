@@ -2,14 +2,9 @@
 import { NoticeSchema } from "@/schemas";
 import { SchemaStore } from "@/store/modules/template";
 import { TextControl, ControlBox, StyleControl } from "@/components/controls";
-import type { StyleEmitItem } from "@/types";
 
 const schemaStore = SchemaStore();
 const noticeSchema = computed(() => schemaStore.selectedSchema as NoticeSchema);
-
-function onChangeStyle(item: StyleEmitItem) {
-  unref(noticeSchema).style.setValue(item.key, item.value);
-}
 </script>
 
 <template>
@@ -18,7 +13,7 @@ function onChangeStyle(item: StyleEmitItem) {
     <TextControl v-model:value="noticeSchema.text" />
   </ControlBox>
   <ControlBox title="公告样式">
-    <StyleControl :style="noticeSchema.style" @change-style="onChangeStyle" />
+    <StyleControl />
   </ControlBox>
 </template>
 

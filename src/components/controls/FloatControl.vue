@@ -1,30 +1,45 @@
 <script lang="ts" setup>
+import { BaseSchema } from "@/schemas";
 import { SchemaStore } from "@/store/modules/template";
 
+const emit = defineEmits(["change-position"]);
 const schemaStore = SchemaStore();
-const isFloat = ref(false);
-const zIndex = ref(0);
+const style = computed(() => (schemaStore.selectedSchema as BaseSchema)?.style);
 
-function onChange(float: UndOf<StrOrNum | boolean>) {
-  const value = !float ? "relative" : "absolute";
-  schemaStore.selectedSchema?.style.setValue("position", value);
+function onChangePosition(bool: any) {
+  const value = !bool ? "relative" : "absolute";
+  unref(style).setValue("position", value);
+  emit("change-position", bool);
 }
 
-function onChangeIndex(value: any) {
-  schemaStore.selectedSchema?.style.setValue("zIndex", value);
-}
+const onChangePositionTop = (value: any) => unref(style).setValue("top", value);
+const onChangePositionLeft = (value: any) =>
+  unref(style).setValue("left", value);
+const onChangeIndex = (value: any) => unref(style).setValue("zIndex", value);
 </script>
 
 <template>
   <div :class="$style.controlStyleItem">
     <div :class="$style.controlItemLabel">浮动</div>
-    <a-switch v-model="isFloat" type="round" @change="onChange" />
+    <a-switch type="round" @change="onChangePosition" />
   </div>
-
+  <control-item title="上">
+    <a-input-number
+      @input="onChangePositionTop"
+      @change="onChangePositionTop"
+      style="width: 126px"
+    />
+  </control-item>
+  <control-item title="左">
+    <a-input-number
+      @input="onChangePositionLeft"
+      @change="onChangePositionLeft"
+      style="width: 126px"
+    />
+  </control-item>
   <div :class="$style.controlStyleItem">
     <div :class="$style.controlItemLabel">层级</div>
     <a-input-number
-      v-model="zIndex"
       @input="onChangeIndex"
       @change="onChangeIndex"
       style="width: 126px"

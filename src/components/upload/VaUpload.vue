@@ -3,13 +3,12 @@ import IconEdit from "@arco-design/web-vue/es/icon/icon-edit";
 import IconPlus from "@arco-design/web-vue/es/icon/icon-plus";
 import type { FileItem } from "@arco-design/web-vue";
 
+const emit = defineEmits(["upload"]);
 defineProps<{ file?: FileItem }>();
 
-const onChange = (_: any, currentFile: FileItem) => {
-  console.log("currentFile", currentFile);
-};
+const onChange = (_: any, currentFile: FileItem) => {};
 const onProgress = (currentFile: FileItem) => {
-  console.log("currentFile", currentFile);
+  emit("upload", currentFile.url);
 };
 </script>
 

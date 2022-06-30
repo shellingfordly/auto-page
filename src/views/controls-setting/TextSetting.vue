@@ -7,10 +7,6 @@ import FloatControl from "@/components/controls/FloatControl.vue";
 
 const schemaStore = SchemaStore();
 const textSchema = computed(() => schemaStore.selectedSchema as TextSchema);
-
-function onChangeStyle(item: StyleEmitItem) {
-  unref(textSchema).style.setValue(item.key, item.value);
-}
 </script>
 
 <template>
@@ -22,7 +18,7 @@ function onChangeStyle(item: StyleEmitItem) {
     <FloatControl />
   </ControlBox>
   <ControlBox title="样式">
-    <StyleControl :style="textSchema.style" @change-style="onChangeStyle" />
+    <StyleControl />
   </ControlBox>
 </template>
 

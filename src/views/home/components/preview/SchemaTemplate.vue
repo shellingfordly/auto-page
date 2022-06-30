@@ -29,6 +29,16 @@ const comp = computed(() => {
       break;
   }
 });
+const style = props.schema.style;
+
+function dragover(event: DragEvent) {
+  console.log("event", event.x, event.y);
+
+  // if (props.schema.style.position === "absolute") {
+  //   style.setValue("top", event.x);
+  //   style.setValue("left", event.y);
+  // }
+}
 </script>
 
 <template>
@@ -36,5 +46,3 @@ const comp = computed(() => {
     <component :is="comp" v-bind="{ schema }"></component>
   </div>
 </template>
-
-<style scoped lang="less"></style>

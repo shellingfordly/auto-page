@@ -4,16 +4,18 @@ import "reflect-metadata";
 type TextAlignType = "left" | "right" | "center";
 
 export interface StyleType {
-  width: number | null;
-  height: number | null;
-  padding: number | null;
-  margin: number | null;
-  border: number | null;
-  borderRadius: number | null;
+  width: NullOf<number>;
+  height: NullOf<number>;
+  padding: NullOf<number>;
+  margin: NullOf<number>;
+  border: NullOf<number>;
+  borderRadius: NullOf<number>;
   textAlign: TextAlignType | null;
-  backgroundColor: string | null;
-  position: string | null;
-  zIndex: number | null;
+  backgroundColor: NullOf<string>;
+  position: NullOf<string>;
+  zIndex: NullOf<number>;
+  top: NullOf<number>;
+  left: NullOf<number>;
 }
 
 export type StyleKeys = keyof StyleType;
@@ -40,35 +42,41 @@ export function getLabel(target: any, propertyKey: StyleKeys) {
 export class BaseStyle implements StyleType {
   @unit("px")
   @label("宽度")
-  width: number | null = null;
+  width: NullOf<number> = null;
   @unit("px")
   @label("高度")
-  height: number | null = null;
+  height: NullOf<number> = null;
   @unit("px")
   @label("内边距")
-  padding: number | null = null;
+  padding: NullOf<number> = null;
   @unit("px")
   @label("外边距")
-  margin: number | null = null;
+  margin: NullOf<number> = null;
   @unit("px")
   @label("边框")
-  border: number | null = null;
+  border: NullOf<number> = null;
   @unit("px")
   @label("圆角")
-  borderRadius: number | null = null;
+  borderRadius: NullOf<number> = null;
   @unit("px")
   @label("字体大小")
-  fontSize: number | null = null;
+  fontSize: NullOf<number> = null;
   @label("对齐方式")
   textAlign: TextAlignType | null = null;
   @label("背景色")
-  backgroundColor: string | null = null;
+  backgroundColor: NullOf<string> = null;
   @label("文本颜色")
-  color: string | null = null;
+  color: NullOf<string> = null;
   @label("浮动")
-  position: string | null = null;
+  position: NullOf<string> = null;
   @label("层级")
-  zIndex: number | null = null;
+  zIndex: NullOf<number> = null;
+  @unit("px")
+  @label("顶部距离")
+  top: NullOf<number> = null;
+  @unit("px")
+  @label("左边框距离")
+  left: NullOf<number> = null;
 
   constructor(style?: Partial<BaseStyle>) {
     style && this.initValue(style);

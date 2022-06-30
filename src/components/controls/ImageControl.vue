@@ -5,7 +5,7 @@ import type { FileItem } from "@arco-design/web-vue";
 import { Icon } from "@iconify/vue";
 import VaUpload from "../upload/VaUpload.vue";
 
-const emit = defineEmits(["delete", "change-link", "change-img"]);
+const emit = defineEmits(["delete", "change"]);
 const props = defineProps<{ image: ImageInfoType; deleteIcon?: boolean }>();
 const file = computed(() => {
   const url = props.image.url;
@@ -14,7 +14,11 @@ const file = computed(() => {
 });
 
 function onChangeLink(value: string) {
-  emit("change-link", { ...props.image, link: value });
+  emit("change", { ...props.image, link: value });
+}
+
+function onUpload(value: type) {
+  emit("change", { ...props.image, url: value });
 }
 </script>
 
@@ -25,7 +29,7 @@ function onChangeLink(value: string) {
     </a-tooltip>
     <div :class="$style.item">
       <div :class="$style.controlItemLabel">上传图片：</div>
-      <VaUpload :file="file" />
+      <VaUpload :file="file" @upload="onUpload" />
     </div>
     <div :class="$style.item">
       <div :class="$style.controlItemLabel">跳转链接：</div>
