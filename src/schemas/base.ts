@@ -9,6 +9,7 @@ export interface BaseSchemaApi {
   status: boolean;
   link: string | undefined;
   style: BaseStyle;
+  floatStatus: boolean | undefined;
   newFunc: (schema?: SchemaItemType) => SchemaItemType;
 }
 
@@ -20,6 +21,7 @@ export class BaseSchema implements BaseSchemaApi {
   public status = false;
   public link: string | undefined;
   public style: BaseStyle;
+  public floatStatus: boolean | undefined;
 
   constructor() {
     this.style = new BaseStyle();

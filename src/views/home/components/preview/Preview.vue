@@ -1,11 +1,31 @@
 <script lang="ts" setup>
+import type { SchemaItemType, PositionType } from "@/types";
 import SchemaTemplate from "./SchemaTemplate.vue";
 import { DRAGGABLE_GROUP } from "@/constants";
-import { SchemaItemType } from "@/types";
 import draggable from "vuedraggable";
-import { useDraggable } from "@vueuse/core";
+import { SchemaStore } from "@/store/modules/template";
 
 const content = ref<SchemaItemType[]>([]);
+const dragRef = ref();
+const boxElement = ref();
+const schemaStore = SchemaStore();
+const schema = computed(() => schemaStore.selectedSchema);
+const { start } = useBoxDraggable(dragRef, {
+  boxElement,
+  onMoving,
+  status: computed(() => unref(schema)?.floatStatus),
+  format: true,
+});
+
+function pointerdown(e: PointerEvent) {
+  dragRef.value = e.target;
+  start();
+}
+
+function onMoving(pos: PositionType) {
+  unref(schema)?.style.setValue("top", pos.y);
+  unref(schema)?.style.setValue("left", pos.x);
+}
 </script>
 
 <template>
@@ -18,10 +38,10 @@ const content = ref<SchemaItemType[]>([]);
           :group="DRAGGABLE_GROUP"
           item-key="schemaId"
           ghost-class="ghost-item"
-          ref="dragRef"
+          ref="boxElement"
         >
           <template #item="{ element }">
-            <SchemaTemplate :schema="element" />
+            <SchemaTemplate :schema="element" @pointerdown="pointerdown" />
           </template>
         </draggable>
       </div>

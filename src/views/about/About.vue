@@ -2,13 +2,13 @@
 import { useBoxDraggable } from "@/hooks/useBoxDraggable";
 
 const dragRef = ref();
-const boxRef = ref();
+const boxElement = ref();
 
-const { position } = useBoxDraggable(dragRef, boxRef);
+const { position } = useBoxDraggable(dragRef, { boxElement });
 </script>
 
 <template>
-  <div class="box" ref="boxRef">
+  <div class="box" ref="boxElement">
     <div
       class="item"
       ref="dragRef"

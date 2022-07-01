@@ -1,8 +1,15 @@
 export * from "./schema.type";
-import type { CSSProperties } from "vue";
+import type { ComputedRef, CSSProperties } from "vue";
 export * from "./slideshow.type";
 import type { Ref } from "vue";
 
-export type { CSSProperties };
+export type CommonRef<T> = ComputedRef<T> | Ref<T>;
+
+export type { Ref, ComputedRef, CSSProperties };
 
 export type MaybeRef<T> = T | Ref<T>;
+
+export type PositionType = {
+  x: number;
+  y: number;
+};

@@ -1,46 +1,65 @@
-import { MaybeRef } from "@/types";
+import type { MaybeRef, PositionType, CommonRef } from "@/types";
 import { useEventListener, isClient } from "@vueuse/core";
 
-type DragElement = MaybeRef<HTMLElement | SVGElement | null | undefined>;
+type DragRef = MaybeRef<HTMLElement | SVGElement | null | undefined>;
 
-export function useBoxDraggable(target: DragElement, boxElement: DragElement) {
+interface UseBoxDraggableOptions {
+  boxElement: DragRef;
+  onMoving?: (pos: PositionType) => void;
+  status?: CommonRef<boolean | undefined>;
+  format?: boolean;
+}
+
+export function useBoxDraggable(
+  target: DragRef,
+  options: UseBoxDraggableOptions
+) {
+  const boxElement = options.boxElement;
   const position = reactive({ x: 0, y: 0 });
-  let status = ref(false);
+  const status = ref(false);
 
-  const handleEvent = (e: PointerEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleEvent = (e?: PointerEvent) => {
+    e && e.preventDefault();
+    e && e.stopPropagation();
   };
 
   function move(e: PointerEvent) {
-    if (!unref(status) || e.target !== unref(target)) return;
-    const dom = unref(target)!.getBoundingClientRect();
-    const rect = unref(boxElement)!.getBoundingClientRect() || {
+    if (
+      !unref(options.status) ||
+      !unref(status) ||
+      !unref(target) ||
+      !unref(boxElement)
+    ) {
+      return;
+    }
+    const _target = (unref(target) as any).$el ?? unref(target);
+    const _boxElement = (unref(boxElement) as any).$el ?? unref(boxElement);
+    const rect = _target!.getBoundingClientRect();
+    const rectBox = _boxElement!.getBoundingClientRect() || {
       left: 0,
       top: 0,
     };
-    const x = e.pageX - rect.left - dom.width / 2;
-    const y = e.pageY - rect.top - dom.height / 2;
-    if (x > 0 && x < rect.width - dom.width) {
-      position.x = x;
-    }
-    if (y > 0 && y < rect.height - dom.height) {
-      position.y = y;
-    }
+    const x = e.pageX - rectBox.left - rect.width / 2;
+    const y = e.pageY - rectBox.top - rect.height / 2;
+    if (x > 0 && x < rectBox.width - rect.width)
+      position.x = options.format ? Math.floor(x) : x;
+    if (y > 0 && y < rectBox.height - rect.height)
+      position.y = options.format ? Math.floor(y) : y;
+    options.onMoving && options.onMoving(position);
     handleEvent(e);
   }
 
-  function leave(e: PointerEvent) {
+  function leave(e?: PointerEvent) {
     status.value = false;
     handleEvent(e);
   }
 
-  function start(e: PointerEvent) {
+  function start(e?: PointerEvent) {
     status.value = true;
     handleEvent(e);
   }
 
-  function end(e: PointerEvent) {
+  function end(e?: PointerEvent) {
     status.value = false;
     handleEvent(e);
   }
@@ -52,5 +71,5 @@ export function useBoxDraggable(target: DragElement, boxElement: DragElement) {
     useEventListener(boxElement, "pointerleave", leave, true);
   }
 
-  return { position, ...toRefs(position), status };
+  return { position, ...toRefs(position), status, start, move, end, leave };
 }

@@ -4,18 +4,22 @@ import { SchemaStore } from "@/store/modules/template";
 
 const emit = defineEmits(["change-position"]);
 const schemaStore = SchemaStore();
-const style = computed(() => (schemaStore.selectedSchema as BaseSchema)?.style);
+const schema = computed(() => schemaStore.selectedSchema as BaseSchema);
+const style = computed(() => unref(schema).style);
 
 function onChangePosition(bool: any) {
   const value = !bool ? "relative" : "absolute";
-  unref(style).setValue("position", value);
+  unref(schema).setValue("floatStatus", bool);
+  unref(schema).style.setValue("position", value);
   emit("change-position", bool);
 }
 
-const onChangePositionTop = (value: any) => unref(style).setValue("top", value);
+const onChangePositionTop = (value: any) =>
+  unref(schema).style.setValue("top", value);
 const onChangePositionLeft = (value: any) =>
-  unref(style).setValue("left", value);
-const onChangeIndex = (value: any) => unref(style).setValue("zIndex", value);
+  unref(schema).style.setValue("left", value);
+const onChangeIndex = (value: any) =>
+  unref(schema).style.setValue("zIndex", value);
 </script>
 
 <template>
@@ -25,6 +29,7 @@ const onChangeIndex = (value: any) => unref(style).setValue("zIndex", value);
   </div>
   <control-item title="上">
     <a-input-number
+      v-model="(style.top as number)"
       @input="onChangePositionTop"
       @change="onChangePositionTop"
       style="width: 126px"
@@ -32,6 +37,7 @@ const onChangeIndex = (value: any) => unref(style).setValue("zIndex", value);
   </control-item>
   <control-item title="左">
     <a-input-number
+      v-model="(style.left as number)"
       @input="onChangePositionLeft"
       @change="onChangePositionLeft"
       style="width: 126px"
@@ -40,6 +46,7 @@ const onChangeIndex = (value: any) => unref(style).setValue("zIndex", value);
   <div :class="$style.controlStyleItem">
     <div :class="$style.controlItemLabel">层级</div>
     <a-input-number
+      v-model="(style.zIndex as number)"
       @input="onChangeIndex"
       @change="onChangeIndex"
       style="width: 126px"
