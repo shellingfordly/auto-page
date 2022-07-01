@@ -8,9 +8,9 @@ export class TextSchema extends BaseSchema {
   public schemaId = Symbol(SchemaId.Text);
   public text = "This is TextSchema";
   public style = new BaseStyle({
-    color: "black",
+    color: "white",
     textAlign: "center",
-    backgroundColor: "white",
+    backgroundColor: "",
     padding: 0,
     margin: 0,
     fontSize: 14,

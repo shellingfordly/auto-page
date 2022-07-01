@@ -4,6 +4,7 @@ import SchemaTemplate from "./SchemaTemplate.vue";
 import { DRAGGABLE_GROUP } from "@/constants";
 import draggable from "vuedraggable";
 import { SchemaStore } from "@/store/modules/template";
+import { useEventListener } from "@vueuse/core";
 
 const content = ref<SchemaItemType[]>([]);
 const dragRef = ref();
@@ -16,6 +17,15 @@ const { start } = useBoxDraggable(dragRef, {
   status: computed(() => unref(schema)?.floatStatus),
   format: true,
 });
+const stop = useEventListener(document, "keydown", (evt: KeyboardEvent) => {
+  const schemaId = unref(schema)?.schemaId;
+  if (schemaId && ["Backspace", "Delete"].includes(evt.code)) {
+    content.value = unref(content).filter((v) => v.schemaId !== schemaId);
+    schemaStore.setSelectedSchema(null);
+  }
+});
+
+onUnmounted(stop);
 
 function pointerdown(e: PointerEvent) {
   dragRef.value = e.target;

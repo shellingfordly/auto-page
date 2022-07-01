@@ -16,7 +16,7 @@ export const SchemaStore = defineStore({
     setSelectedId(id: Symbol | undefined) {
       this.selectedSchemaId = id;
     },
-    setSelectedSchema(schema: SchemaItemType) {
+    setSelectedSchema(schema: SchemaItemType | null) {
       this.selectedSchema = schema;
     },
   },
