@@ -11,6 +11,7 @@ export class ImageSchema extends BaseSchema {
   public name = "图片";
   public icon = "clarity:image-line";
   public schemaId = Symbol(SchemaId.Image);
+
   public info = createImageInfo({
     url,
   });
@@ -19,6 +20,7 @@ export class ImageSchema extends BaseSchema {
     super();
     this.style = new BaseStyle({
       height: 100,
+      border: 1,
     });
   }
 

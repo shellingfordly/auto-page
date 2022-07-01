@@ -8,6 +8,7 @@ export class ContainerSchema extends BaseSchema {
   public schemaId = Symbol(SchemaId.Container);
   public style = new BaseStyle({
     height: 300,
+    backgroundColor: "",
   });
 
   constructor(schema?: ContainerSchema) {

@@ -29,29 +29,30 @@ onUnmounted(stop);
 
 function pointerdown(e: PointerEvent) {
   dragRef.value = e.target;
-  start();
+  // start();
 }
 
 function onMoving(pos: PositionType) {
-  unref(schema)?.style.setValue("top", pos.y);
-  unref(schema)?.style.setValue("left", pos.x);
+  // unref(schema)?.style.setValue("top", pos.y);
+  // unref(schema)?.style.setValue("left", pos.x);
 }
 </script>
 
 <template>
   <a-layout :class="$style.preview">
     <a-resize-box :directions="['right', 'bottom']" :class="$style.resizeBox">
-      <div :class="$style.scrollBox">
+      <div ref="boxElement" :class="$style.scrollBox">
         <draggable
           :class="$style.draggable"
           :list="content"
           :group="DRAGGABLE_GROUP"
           item-key="schemaId"
           ghost-class="ghost-item"
-          ref="boxElement"
         >
           <template #item="{ element }">
-            <SchemaTemplate :schema="element" @pointerdown="pointerdown" />
+            <div>
+              <SchemaTemplate :schema="element" @pointerdown="pointerdown" />
+            </div>
           </template>
         </draggable>
       </div>

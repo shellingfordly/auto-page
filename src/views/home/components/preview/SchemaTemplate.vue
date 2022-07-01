@@ -32,7 +32,5 @@ const comp = computed(() => {
 </script>
 
 <template>
-  <div>
-    <component :is="comp" v-bind="{ schema, ...$attrs }"></component>
-  </div>
+  <component :is="comp" v-bind="{ schema, ...$attrs }" />
 </template>

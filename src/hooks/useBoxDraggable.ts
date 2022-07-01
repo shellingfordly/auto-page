@@ -32,6 +32,8 @@ export function useBoxDraggable(
     ) {
       return;
     }
+    console.log("move");
+
     const _target = (unref(target) as any).$el ?? unref(target);
     const _boxElement = (unref(boxElement) as any).$el ?? unref(boxElement);
     const rect = _target!.getBoundingClientRect();

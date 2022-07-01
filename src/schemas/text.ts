@@ -6,12 +6,13 @@ export class TextSchema extends BaseSchema {
   public name = "文本";
   public icon = "bx:text";
   public schemaId = Symbol(SchemaId.Text);
-  public text = "This is TextSchema";
+  public text = "这是一个文本";
   public style = new BaseStyle({
+    width: 100,
     color: "white",
     textAlign: "center",
     backgroundColor: "",
-    padding: 0,
+    padding: 10,
     margin: 0,
     fontSize: 14,
   });
