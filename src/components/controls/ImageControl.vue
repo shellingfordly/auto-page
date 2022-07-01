@@ -17,7 +17,7 @@ function onChangeLink(value: string) {
   emit("change", { ...props.image, link: value });
 }
 
-function onUpload(value: type) {
+function onUpload(value: string) {
   emit("change", { ...props.image, url: value });
 }
 </script>

@@ -30,7 +30,7 @@ const onUpdateItem = updateItem.bind(slideshowSchema.value);
       :key="image.url"
       :deleteIcon="true"
       @delete="onDelete(image.uid)"
-      @change-link="onUpdateItem"
+      @change="onUpdateItem"
     />
     <a-button long @click="onAddItem({})"> Add Item </a-button>
   </ControlBox>

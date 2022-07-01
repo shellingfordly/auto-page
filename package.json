@@ -10,6 +10,8 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.31.0",
     "@iconify/vue": "^3.2.1",
+    "@vueuse/components": "^8.7.5",
+    "@vueuse/core": "^8.7.5",
     "lodash": "^4.17.21",
     "pinia": "^2.0.14",
     "reflect-metadata": "^0.1.13",

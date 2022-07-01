@@ -23,6 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# auto
+# config
 ./auto-imports.d.ts
 ./components.d.ts
+
+

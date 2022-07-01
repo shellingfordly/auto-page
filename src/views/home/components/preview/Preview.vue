@@ -3,10 +3,9 @@ import SchemaTemplate from "./SchemaTemplate.vue";
 import { DRAGGABLE_GROUP } from "@/constants";
 import { SchemaItemType } from "@/types";
 import draggable from "vuedraggable";
+import { useDraggable } from "@vueuse/core";
 
 const content = ref<SchemaItemType[]>([]);
-
-function dragover(event: any) {}
 </script>
 
 <template>
@@ -16,10 +15,10 @@ function dragover(event: any) {}
         <draggable
           :class="$style.draggable"
           :list="content"
+          :group="DRAGGABLE_GROUP"
           item-key="schemaId"
           ghost-class="ghost-item"
-          :group="DRAGGABLE_GROUP"
-          @dragover="dragover"
+          ref="dragRef"
         >
           <template #item="{ element }">
             <SchemaTemplate :schema="element" />
