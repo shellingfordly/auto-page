@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { IconMoonFill, IconSunFill } from "@arco-design/web-vue/es/icon";
+import Nav from "../nav/Nav.vue";
 const isDark = ref(false);
 
 onClick();
@@ -18,7 +20,23 @@ function onClick() {
 
 <template>
   <a-layout-header :class="$style.header">
-    <a-button type="primary" @click="onClick">黑暗模式</a-button>
+    <a-row>
+      <a-col :span="5" align="left"> logo </a-col>
+      <a-col :span="14">
+        <a-space>
+          <a-button>预览</a-button>
+          <a-button>导入json</a-button>
+          <a-button>导出json</a-button>
+        </a-space>
+        <!-- <Nav /> -->
+      </a-col>
+      <a-col :span="5" align="right">
+        <a-button type="text" @click="onClick">
+          <icon-moon-fill v-if="isDark" />
+          <icon-sun-fill v-else />
+        </a-button>
+      </a-col>
+    </a-row>
   </a-layout-header>
 </template>
 
